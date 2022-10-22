@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23416407290484AB0054F8B6 /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23416406290484AB0054F8B6 /* ProfilePicture.swift */; };
 		B89E52762901E42000A8A7C3 /* gift_trackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89E52752901E42000A8A7C3 /* gift_trackerApp.swift */; };
 		B89E52782901E42000A8A7C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89E52772901E42000A8A7C3 /* ContentView.swift */; };
 		B89E527A2901E42200A8A7C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B89E52792901E42200A8A7C3 /* Assets.xcassets */; };
@@ -14,6 +15,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23416406290484AB0054F8B6 /* ProfilePicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePicture.swift; sourceTree = "<group>"; };
+		23416409290485910054F8B6 /* BlankProfile.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = BlankProfile.webp; sourceTree = "<group>"; };
 		B89E52722901E42000A8A7C3 /* gift-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gift-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B89E52752901E42000A8A7C3 /* gift_trackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gift_trackerApp.swift; sourceTree = "<group>"; };
 		B89E52772901E42000A8A7C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,7 +56,9 @@
 			children = (
 				B89E52752901E42000A8A7C3 /* gift_trackerApp.swift */,
 				B89E52772901E42000A8A7C3 /* ContentView.swift */,
+				23416406290484AB0054F8B6 /* ProfilePicture.swift */,
 				B89E52792901E42200A8A7C3 /* Assets.xcassets */,
+				23416409290485910054F8B6 /* BlankProfile.webp */,
 				B89E527B2901E42200A8A7C3 /* Preview Content */,
 			);
 			path = "gift-tracker";
@@ -138,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B89E52782901E42000A8A7C3 /* ContentView.swift in Sources */,
+				23416407290484AB0054F8B6 /* ProfilePicture.swift in Sources */,
 				B89E52762901E42000A8A7C3 /* gift_trackerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
