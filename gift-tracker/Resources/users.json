@@ -1,0 +1,34 @@
+[
+    {
+        "user_id": 1001,
+        "username": "User1",
+        "display_name": "User 1",
+        "image_name": "1001_pfp",
+        "birthday": "01-01-1990",
+        "notification_preference": "None"
+        "city": "Sacremento",
+        "state": "California",
+        "is_friend": false,
+        "is_family": true,
+        "is_favorite": true,
+        "upcoming_gift_needed": true,
+        "past_gifts": ["watch", "makeup"],
+        "gift_ideas": ["snack", "ipod", "speaker"]
+    },
+    {
+        "user_id": 1002,
+        "username": "User2",
+        "display_name": "User 2",
+        "image_name": "1002_pfp",
+        "birthday": "11-25-2004",
+        "notification_preference": "1 week"
+        "city": "Boston",
+        "state": "Massachusets",
+        "is_friend": true,
+        "is_family": false,
+        "is_favorite": false,
+        "upcoming_gift_needed": false,
+        "past_gifts": ["candle"],
+        "gift_ideas": ["soap", "chocolate"]
+    }
+]
