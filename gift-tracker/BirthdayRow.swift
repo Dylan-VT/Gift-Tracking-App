@@ -16,6 +16,7 @@ struct BirthdayRow: View {
                 .resizable()
                 .frame(width: 50, height: 50)
             Text(user.display_name)
+            Text(user.birthday)
             
             Spacer()
         }

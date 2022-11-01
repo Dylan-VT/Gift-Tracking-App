@@ -12,7 +12,7 @@ struct User: Hashable, Codable, Identifiable {
     var id: Int
     var user_name: String
     var display_name: String
-    var birthday: Date
+    var birthday: String //change to Date
 
     private var user_profile_picture: String
     var image: Image {
