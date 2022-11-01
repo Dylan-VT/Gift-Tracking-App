@@ -10,7 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     var body: some View {
         VStack {
-            ProfilePicture()
+            ProfilePicture(image: Image("profile_picture_1"))
             VStack(alignment: .leading) {
                 HStack {
                     Text("John Appleseed")
