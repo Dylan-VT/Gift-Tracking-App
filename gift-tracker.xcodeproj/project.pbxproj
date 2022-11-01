@@ -12,16 +12,17 @@
 		B89E52782901E42000A8A7C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89E52772901E42000A8A7C3 /* ContentView.swift */; };
 		B89E527A2901E42200A8A7C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B89E52792901E42200A8A7C3 /* Assets.xcassets */; };
 		B89E527D2901E42200A8A7C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B89E527C2901E42200A8A7C3 /* Preview Assets.xcassets */; };
+		B8F9DFEB2904906300C43EB9 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F9DFEA2904906300C43EB9 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		23416406290484AB0054F8B6 /* ProfilePicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePicture.swift; sourceTree = "<group>"; };
-		23416409290485910054F8B6 /* BlankProfile.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = BlankProfile.webp; sourceTree = "<group>"; };
 		B89E52722901E42000A8A7C3 /* gift-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gift-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B89E52752901E42000A8A7C3 /* gift_trackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gift_trackerApp.swift; sourceTree = "<group>"; };
 		B89E52772901E42000A8A7C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B89E52792901E42200A8A7C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B89E527C2901E42200A8A7C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B8F9DFEA2904906300C43EB9 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = "gift-tracker/Views/ProfileView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +40,7 @@
 			isa = PBXGroup;
 			children = (
 				B89E52742901E42000A8A7C3 /* gift-tracker */,
+				B8F9DFEA2904906300C43EB9 /* ProfileView.swift */,
 				B89E52732901E42000A8A7C3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,7 +60,6 @@
 				B89E52772901E42000A8A7C3 /* ContentView.swift */,
 				23416406290484AB0054F8B6 /* ProfilePicture.swift */,
 				B89E52792901E42200A8A7C3 /* Assets.xcassets */,
-				23416409290485910054F8B6 /* BlankProfile.webp */,
 				B89E527B2901E42200A8A7C3 /* Preview Content */,
 			);
 			path = "gift-tracker";
@@ -142,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8F9DFEB2904906300C43EB9 /* ProfileView.swift in Sources */,
 				B89E52782901E42000A8A7C3 /* ContentView.swift in Sources */,
 				23416407290484AB0054F8B6 /* ProfilePicture.swift in Sources */,
 				B89E52762901E42000A8A7C3 /* gift_trackerApp.swift in Sources */,
