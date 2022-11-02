@@ -31,19 +31,17 @@ struct LoginView: View {
                     loggedIn = signIn(username, password)
                     if loggedIn.success {
                     }
-                    
                 }
                 Text("Or")
                 //.offset(y: 30)
                 NavigationLink(destination: CreateAccountView()){
                     Text("Create an Account")
                 }
-                
             }
         }
     }
     func signIn(_ u: String,_ p: String)-> (success: Bool, erMessage: String){
-        return (true, "Error, Username and Password don't match")
+        return (false, "Error, Username and Password don't match")
     }
     
 }

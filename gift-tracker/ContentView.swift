@@ -45,30 +45,27 @@ struct CalView: View {
 struct ContentView: View {
     @State var loggedIn: Bool = false
     var body: some View {
-        if !loggedIn{
-            LoginView(loggedIn: (false, ""))
-        }
-        else{
-            //the tab view section is where the tabs are called in the content view
-            TabView {
-                ConView()
-                    .tabItem {
-                        Image(systemName:"person.2.fill")
-                        Text("Birthdays")
-                    }
-                HomeView()
-                    .tabItem {
-                        Image(systemName: "gearshape.circle")
-                        Text("Profile")
-                    }
+        
+        //the tab view section is where the tabs are called in the content view
+        TabView {
+            ConView()
+                .tabItem {
+                    Image(systemName:"person..fill")
+                    Text("Birthdays")
+                }
+            HomeView()
+                .tabItem {
+                    Image(systemName: "gearshape.circle")
+                    Text("Profile")
+                }
                 
-                CalView()
-                    .tabItem {
-                        Image(systemName: "calendar")
-                        Text("Calendar View")
-                    }
+            CalView()
+                .tabItem {
+                    Image(systemName: "calendar")
+                    Text("Calendar View")
+                }
             }
-        }
+        
     }
 }
 
