@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		23416407290484AB0054F8B6 /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23416406290484AB0054F8B6 /* ProfilePicture.swift */; };
+		235132162912EF0D00D3E8F8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235132152912EF0D00D3E8F8 /* LoginView.swift */; };
 		B89E52762901E42000A8A7C3 /* gift_trackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89E52752901E42000A8A7C3 /* gift_trackerApp.swift */; };
 		B89E52782901E42000A8A7C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89E52772901E42000A8A7C3 /* ContentView.swift */; };
 		B89E527A2901E42200A8A7C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B89E52792901E42200A8A7C3 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		23416406290484AB0054F8B6 /* ProfilePicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePicture.swift; sourceTree = "<group>"; };
+		235132152912EF0D00D3E8F8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B89E52722901E42000A8A7C3 /* gift-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gift-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B89E52752901E42000A8A7C3 /* gift_trackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gift_trackerApp.swift; sourceTree = "<group>"; };
 		B89E52772901E42000A8A7C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				B89E52752901E42000A8A7C3 /* gift_trackerApp.swift */,
 				B89E52772901E42000A8A7C3 /* ContentView.swift */,
 				23416406290484AB0054F8B6 /* ProfilePicture.swift */,
+				235132152912EF0D00D3E8F8 /* LoginView.swift */,
 				B89E52792901E42200A8A7C3 /* Assets.xcassets */,
 				B89E527B2901E42200A8A7C3 /* Preview Content */,
 			);
@@ -146,6 +149,7 @@
 				B8F9DFEB2904906300C43EB9 /* ProfileView.swift in Sources */,
 				B89E52782901E42000A8A7C3 /* ContentView.swift in Sources */,
 				23416407290484AB0054F8B6 /* ProfilePicture.swift in Sources */,
+				235132162912EF0D00D3E8F8 /* LoginView.swift in Sources */,
 				B89E52762901E42000A8A7C3 /* gift_trackerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
