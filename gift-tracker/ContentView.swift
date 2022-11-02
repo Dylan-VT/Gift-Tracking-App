@@ -46,7 +46,7 @@ struct ContentView: View {
     @State var loggedIn: Bool = false
     var body: some View {
         if !loggedIn{
-            LoginView(loggedIn: false)
+            LoginView(loggedIn: (false, ""))
         }
         else{
             //the tab view section is where the tabs are called in the content view

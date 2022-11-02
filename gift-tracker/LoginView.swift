@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var loggedIn: Bool
+    @State var loggedIn :(success: Bool, erMessage: String) = (false, "")
     @State var username: String = ""
     @State var password: String = ""
     var body: some View {
@@ -18,6 +18,8 @@ struct LoginView: View {
                 Text("Log In")
                 //.offset()
                     .font(.system(size:32))
+                Text(loggedIn.erMessage)
+                    .foregroundColor(.red)
                 TextField("Username", text: $username)
                     .textFieldStyle(.roundedBorder)
                     .padding(.horizontal, 40)
@@ -27,6 +29,8 @@ struct LoginView: View {
                     .padding(.horizontal, 40)
                 Button("Sign In"){
                     loggedIn = signIn(username, password)
+                    if loggedIn.success {
+                    }
                     
                 }
                 Text("Or")
@@ -38,8 +42,8 @@ struct LoginView: View {
             }
         }
     }
-    func signIn(_ u: String,_ p: String)-> Bool{
-        return true
+    func signIn(_ u: String,_ p: String)-> (success: Bool, erMessage: String){
+        return (true, "Error, Username and Password don't match")
     }
     
 }
@@ -49,10 +53,13 @@ struct CreateAccountView: View{
     @State var username: String = ""
     @State var password: String = ""
     @State var confirmPassword: String = ""
+    @State var create: (success: Bool, erMessage: String) = (false, "")
     var body: some View{
         VStack(alignment: .center){
             Text("Create an Account")
                 .font(.system(size: 32))
+            Text(create.erMessage)
+                .foregroundColor(.red)
             TextField("Email", text: $email)
                 .textFieldStyle(.roundedBorder)
                 .padding(.horizontal, 40)
@@ -66,18 +73,14 @@ struct CreateAccountView: View{
                 .textFieldStyle(.roundedBorder)
                 .padding(.horizontal, 40)
             Button("Create"){
-                var create = CreateAccount(email, username, password, confirmPassword)
+                create = CreateAccount(email, username, password, confirmPassword)
                 if create.success{
-                    1+1
-                }
-                else{
-                    print(create.erMessage)
                 }
             }
         }
     }
     func CreateAccount(_ e: String,_ u: String,_ p: String,_ p2: String) -> (success: Bool, erMessage: String){
-        return (success: false, "Passwords don't match")
+        return (success: false, erMessage: "Passwords don't match")
     }
 }
 
@@ -86,6 +89,6 @@ struct CreateAccountView: View{
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(loggedIn: false)
+        LoginView(loggedIn: (false, ""))
     }
 }
