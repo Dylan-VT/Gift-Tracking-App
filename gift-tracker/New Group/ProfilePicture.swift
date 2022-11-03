@@ -4,6 +4,7 @@
 //
 //  Created by Ryan Salsburg on 10/22/22.
 //
+//Creates the circle for the profile account
 
 import SwiftUI
 

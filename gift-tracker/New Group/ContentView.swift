@@ -4,6 +4,7 @@
 //
 //  Created by Christian Rhodes on 10/20/22.
 //
+//defines the navigation bar 
 
 import SwiftUI
 
@@ -50,7 +51,7 @@ struct ContentView: View {
         TabView {
             ConView()
                 .tabItem {
-                    Image(systemName:"person..fill")
+                    Image(systemName:"person.fill")
                     Text("Birthdays")
                 }
             HomeView()
