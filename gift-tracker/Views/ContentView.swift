@@ -62,6 +62,12 @@ struct ContentView: View {
                     Image(systemName: "calendar")
                     Text("Calendar View")
                 }
+            LoginView()
+                .tabItem {
+                    Image(systemName:
+                        "key")
+                    Text("Login")
+                }
         }
     }
 }

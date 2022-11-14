@@ -6,6 +6,35 @@
 //
 
 import SwiftUI
+import Foundation
+
+struct UserAccount: Codable {
+    var birthday: String
+    var display_name: String
+    var friends: Array<Int>?
+    var user_id: Int
+    var username: String
+}
+
+func getLogin(_ username: String, _ password: String,_ completion: @escaping (UserAccount) -> Void){
+    let url = URL(string: "http://54.237.192.235/getuser/\(username)")!
+    let task = URLSession.shared.dataTask(with: url) {data, response, error in
+        if let data = data {
+            let decoder = JSONDecoder()
+            do {
+                let json = try decoder.decode(UserAccount.self, from: data)
+                completion(json)
+            } catch {
+                print(error)
+            }
+
+        }
+        
+        
+    }
+    task.resume()
+    
+}
 
 struct LoginView: View {
     @State var loggedIn :(success: Bool, erMessage: String) = (false, "")
@@ -40,8 +69,12 @@ struct LoginView: View {
             }
         }
     }
-    func signIn(_ u: String,_ p: String)-> (success: Bool, erMessage: String){
-        return (false, "Error, Username and Password don't match")
+    func signIn(_ u: String, _ p: String)-> (success: Bool, erMessage: String){
+        print(getLogin(u, p, {data in
+            print(data)
+            print(data.username)
+        }))
+        return (false, "\(u) \(p)")
     }
     
 }
@@ -78,6 +111,7 @@ struct CreateAccountView: View{
         }
     }
     func CreateAccount(_ e: String,_ u: String,_ p: String,_ p2: String) -> (success: Bool, erMessage: String){
+
         return (success: false, erMessage: "Passwords don't match")
     }
 }
