@@ -36,8 +36,7 @@ struct ProfileView: View {
                     Text("\(user.display_name)'s birthday is in \(daysToB) days.")
                         .font(.title2)
                 }
-                Text("Description...")
-                    .padding(5)
+                
             }
             .padding()
         }
@@ -92,7 +91,7 @@ func daysToBirthday(_ birthday: String) -> Int{
     var BdayCount = 0
     
     if let mon = bMonth{
-        for m in 0...mon{
+        for m in 0...mon-1{
             BdayCount += monthLength[m]
             if let y = bYear{
                 if isLeapYear(y) && mon > 2{
@@ -108,7 +107,7 @@ func daysToBirthday(_ birthday: String) -> Int{
     var cDayCount = 0
     
     if let mon = cMonth{
-        for m in 0...mon{
+        for m in 0...mon-1{
             cDayCount += monthLength[m]
             if let y = cYear{
                 if isLeapYear(y) && mon > 2{
