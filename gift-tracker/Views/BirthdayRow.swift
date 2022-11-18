@@ -26,8 +26,9 @@ struct BirthdayRow: View {
 /*
 struct BirthdayRow_Previews: PreviewProvider {
     static var previews: some View {
-        BirthdayRow(user: users[0]) // need to make users in ModelData
+        BirthdayRow(user: users[0]) //need to make users in ModelData
             .previewLayout(.fixed(width: 300, height: 70))
     }
 }
-*/
+ */
+

@@ -46,7 +46,7 @@ struct ContentView: View {
     var body: some View {
         //the tab view section is where the tabs are called in the content view
         TabView {
-            ConView()
+            HomeView()
                 .tabItem {
                     Image(systemName:"person.2.fill")
                     Text("Birthdays")
