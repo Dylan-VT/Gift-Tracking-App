@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		239270E3292ACC7800D9031E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239270E2292ACC7800D9031E /* HomeView.swift */; };
 		5F09553C2922D7CE00BCB79D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F09553A2922D7CE00BCB79D /* User.swift */; };
 		5F09553D2922D7CE00BCB79D /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F09553B2922D7CE00BCB79D /* ModelData.swift */; };
 		5F0955402922D7E800BCB79D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F09553F2922D7E800BCB79D /* ContentView.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		239270E2292ACC7800D9031E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5F09553A2922D7CE00BCB79D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5F09553B2922D7CE00BCB79D /* ModelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		5F09553F2922D7E800BCB79D /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				5F0955422922D80B00BCB79D /* BirthdayRow.swift */,
 				5F0955442922D80B00BCB79D /* LoginView.swift */,
 				5F09553F2922D7E800BCB79D /* ContentView.swift */,
+				239270E2292ACC7800D9031E /* HomeView.swift */,
 				68BE2CD12923E07100DA86F8 /* BDayListView.swift */,
 				68BE2CD829268EF700DA86F8 /* UserListViewModel.swift */,
 			);
@@ -197,6 +200,7 @@
 				5F0955402922D7E800BCB79D /* ContentView.swift in Sources */,
 				5F09554A2922D80B00BCB79D /* ProfilePicture.swift in Sources */,
 				5F0955472922D80B00BCB79D /* BirthdayRow.swift in Sources */,
+				239270E3292ACC7800D9031E /* HomeView.swift in Sources */,
 				5F0955482922D80B00BCB79D /* ProfileView.swift in Sources */,
 				5F09553D2922D7CE00BCB79D /* ModelData.swift in Sources */,
 			);

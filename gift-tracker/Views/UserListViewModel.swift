@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 //parent
 struct UserListViewModel: ObservableObject {
     @Published var users = [UserListModel]()
@@ -15,3 +15,4 @@ struct UserListViewModel: ObservableObject {
 struct UserViewModel {
     
 }
+*/

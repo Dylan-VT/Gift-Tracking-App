@@ -8,7 +8,10 @@
 import SwiftUI
 import Foundation
 
-struct UserAccount: Codable {
+struct UserAccount: Codable, Identifiable{
+    var id: String{
+        self.display_name
+    }
     var birthday: String
     var display_name: String
     var friends: Array<Int>?
