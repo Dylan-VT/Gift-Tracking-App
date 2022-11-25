@@ -11,6 +11,7 @@ let dummyFriends: [UserAccount]  = [UserAccount(birthday: "2001-11-17", display_
 
 struct HomeView: View {
     @State var profiles: [UserAccount]
+    
     var body: some View {
         NavigationView {
             List{
@@ -23,23 +24,8 @@ struct HomeView: View {
     }
 }
 
-/*
-func filterAndSort(friends: [UserAccount], time: Int) -> [UserAccount]{
-    var retFriends: [UserAccount] = []
-    //var placed: Bool = false
-    for friend in friends {
-        if daysToBirthday(friend.birthday) <= time{
-            for fr in retFriends{
-                if daysToBirthday(friend.birthday) < daysToBirthday(fr.birthday){
-                    
-                }
-            }
-        }
-    }
-    
-    return retFriends
-}
- */
+
+
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
