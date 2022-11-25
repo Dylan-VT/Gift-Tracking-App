@@ -44,6 +44,7 @@ struct LoginView: View {
     @State var username: String = ""
     @State var password: String = ""
     @Binding var user: UserAccount
+    @Binding var friendsList: String
     var body: some View {
         NavigationView{
             VStack(alignment: .center,
@@ -78,6 +79,12 @@ struct LoginView: View {
             user.username = data.username
             user.display_name = data.display_name
             user.birthday = data.birthday
+            if let friends = data.friends {
+                friendsList = friends.map {String($0)}.joined(separator: ",")
+                print(friendsList)
+                
+            }
+            
         })
         return (false, "\(u) \(p)")
     }
@@ -126,7 +133,8 @@ struct CreateAccountView: View{
 
 struct LoginView_Previews: PreviewProvider {
     @State static var user: UserAccount = UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25")
+    @State static var friendsList = "2"
     static var previews: some View {
-        LoginView(loggedIn: (false, ""), user: $user)
+        LoginView(loggedIn: (false, ""), user: $user, friendsList: $friendsList)
     }
 }

@@ -20,3 +20,9 @@ struct User: Hashable, Codable, Identifiable {
 }
 
 
+struct Event: Codable {
+    var event_for: Int
+    var event_name: String
+    var event_description: String
+    var event_date: String
+}
