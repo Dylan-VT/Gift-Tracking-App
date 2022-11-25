@@ -15,8 +15,8 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             List{
-                ForEach(profiles) { profile in
-                    NavigationLink(profile.display_name, destination: ProfileView(user:profile))
+                ForEach(profiles) {profile in
+                    NavigationLink(profile.display_name, destination: PrivateProfileView(user:profile))
                 }
             }
             .navigationTitle("Upcoming Birthdays")
@@ -25,10 +25,12 @@ struct HomeView: View {
 }
 
 
-
+/*
 
 struct HomeView_Previews: PreviewProvider {
+    @State var friends: [UserAccount] = dummyFriends
     static var previews: some View {
-        HomeView(profiles: dummyFriends)
+        HomeView(profiles: $friends)
     }
 }
+*/

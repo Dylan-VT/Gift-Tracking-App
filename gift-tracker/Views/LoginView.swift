@@ -43,6 +43,7 @@ struct LoginView: View {
     @State var loggedIn :(success: Bool, erMessage: String) = (false, "")
     @State var username: String = ""
     @State var password: String = ""
+    @Binding var user: UserAccount
     var body: some View {
         NavigationView{
             VStack(alignment: .center,
@@ -73,10 +74,11 @@ struct LoginView: View {
         }
     }
     func signIn(_ u: String, _ p: String)-> (success: Bool, erMessage: String){
-        print(getLogin(u, p, {data in
-            print(data)
-            print(data.username)
-        }))
+        getLogin(u, p, {data in
+            user.username = data.username
+            user.display_name = data.display_name
+            user.birthday = data.birthday
+        })
         return (false, "\(u) \(p)")
     }
     
@@ -123,7 +125,8 @@ struct CreateAccountView: View{
 
 
 struct LoginView_Previews: PreviewProvider {
+    @State static var user: UserAccount = UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25")
     static var previews: some View {
-        LoginView(loggedIn: (false, ""))
+        LoginView(loggedIn: (false, ""), user: $user)
     }
 }

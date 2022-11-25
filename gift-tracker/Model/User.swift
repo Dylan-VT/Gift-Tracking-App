@@ -13,9 +13,10 @@ struct User: Hashable, Codable, Identifiable {
     var user_name: String
     var display_name: String
     var birthday: String //change to Date
-
     private var user_profile_picture: String
     var image: Image {
         Image(user_profile_picture)
     }
 }
+
+

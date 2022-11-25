@@ -10,9 +10,8 @@ import SwiftUI
 let MonthList = ["Blank", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 
-
 struct ProfileView: View {
-    @State var user: UserAccount
+    @Binding var user: UserAccount
     var body: some View {
         VStack {
             ProfilePicture(image: Image("profile_picture_1"))
@@ -131,8 +130,9 @@ func isLeapYear(_ year: Int) -> Bool{
     return (year % 4 == 0 && (year%100 != 0 || year%400 == 0))
 }
 struct ProfileView_Previews: PreviewProvider {
+    @State static var previewUser: UserAccount = UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25")
     static var previews: some View {
-        ProfileView(user: UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25"))
+        ProfileView(user: $previewUser)
     }
 }
 
