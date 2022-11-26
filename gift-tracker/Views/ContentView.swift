@@ -8,16 +8,18 @@
 import SwiftUI
 
 //This struct is made for the "Birthdays" NavTab
+/*
 struct HomeView: View {
     var body: some View {
         NavigationView {
             ZStack {
                 Color.green
             }
-            .navigationTitle("Profile")
+            .navigationTitle("Home")
         }
     }
 }
+ */
 //This struct is made for the "profile" NavTab
 struct ConView: View {
     var body: some View {
@@ -43,15 +45,17 @@ struct CalView: View {
 
 
 struct ContentView: View {
+    @State var user: UserAccount = UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25")
+    @State var friendsList: String = "2"
     var body: some View {
         //the tab view section is where the tabs are called in the content view
         TabView {
-            ConView()
+            HomeView()
                 .tabItem {
                     Image(systemName:"person.2.fill")
                     Text("Birthdays")
                 }
-            HomeView()
+            ProfileView(user: $user)
                 .tabItem {
                     Image(systemName: "gearshape.circle")
                     Text("Profile")
@@ -61,6 +65,12 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "calendar")
                     Text("Calendar View")
+                }
+            LoginView(user: $user, friendsList: $friendsList)
+                .tabItem {
+                    Image(systemName:
+                        "key")
+                    Text("Login")
                 }
         }
     }
