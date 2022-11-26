@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 import Foundation
 
-/*
+
 func getUser(_ username: String,_ completion: @escaping (UserAccount) -> Void){
     let url = URL(string: "http://54.237.192.235/getuser/\(username)")!
     let task = URLSession.shared.dataTask(with: url) {data, response, error in
@@ -25,7 +25,7 @@ func getUser(_ username: String,_ completion: @escaping (UserAccount) -> Void){
     }
     task.resume()
     
-} */
+}
 struct BDayListView: View {
     /*
     Commented out code goes here
