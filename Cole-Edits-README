@@ -1,0 +1,3 @@
+In this brance is the contentView file for the swift project I have on my personal laptop. There isn't much yet since we just need a working copy by next Saturday.
+There are three menu options, the user's profile settings, the list of birthdays, and a calendar view. When you are on that tab the icon is light up to 
+tell the user that they are on that tab.
