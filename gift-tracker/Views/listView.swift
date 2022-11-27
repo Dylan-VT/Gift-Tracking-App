@@ -8,26 +8,27 @@
 import SwiftUI
 import Foundation
 
-//userRow is new string for just the mapping of the json for mapping of json
+//userRow is new string for just the mapping of the json for mapping of json //delete in future
 struct UserROW: Hashable, Codable {
     let name: String
     let bday: String
 }
 
 class ViewModel: ObservableObject {
-    @Published var users: [UserROW] = []
+    //@Published var users: [UserROW] = [] //old way
+    @Published var users: [User] = [] //I want to decode directily to a User
     
     func fetchUser() {
         //create url object and unwarp with guard let NOTE: For now it is hardcodded in
         guard let url = URL(string: "http://54.237.192.235/getallusers") else { return }
         //perform apicall
         let task = URLSession.shared.dataTask(with: url) { [weak self]data, _, error in guard let data = data, error == nil else { return }
-        //conver to json
+        //convert to json
         do {
             //try json decoder
-            let users = try JSONDecoder().decode([UserROW].self, from: data)
+            let users = try JSONDecoder().decode([User].self, from: data)
             print(users)
-            //reminnd the view to update published proterty
+            //remind the view to update published proterty
             DispatchQueue.main.async {
                 self?.users = users
             }
@@ -36,7 +37,7 @@ class ViewModel: ObservableObject {
             //otherwise print the error
             print(error)
         }
-        //END URLSession
+        //end URLSession
         }
         task.resume()
     }
