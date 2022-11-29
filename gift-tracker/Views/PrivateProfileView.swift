@@ -16,6 +16,7 @@ struct PrivateProfileView: View {
     @State var user: UserAccount
     var body: some View {
         VStack {
+            
             ProfilePicture(image: Image("profile_picture_1"))
             VStack(alignment: .leading) {
                 HStack {
@@ -43,6 +44,9 @@ struct PrivateProfileView: View {
         }
     }
 }
+
+//502 == error
+//200 == successful
 
  
 struct PrivateProfileView_Previews: PreviewProvider {

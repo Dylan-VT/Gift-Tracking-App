@@ -41,6 +41,8 @@ struct ProfileView: View {
         }
     }
 }
+
+
 func formatBirthday(_ birthday: String) -> String{
     let yeMoDa = birthday.components(separatedBy: "-")
     let year = Int(yeMoDa[0])

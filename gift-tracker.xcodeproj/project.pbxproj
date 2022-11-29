@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		239270E3292ACC7800D9031E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239270E2292ACC7800D9031E /* HomeView.swift */; };
+		239270E529365FBB00D9031E /* addFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239270E429365FBB00D9031E /* addFriendView.swift */; };
 		5F09553C2922D7CE00BCB79D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F09553A2922D7CE00BCB79D /* User.swift */; };
 		5F09553D2922D7CE00BCB79D /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F09553B2922D7CE00BCB79D /* ModelData.swift */; };
 		5F0955402922D7E800BCB79D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F09553F2922D7E800BCB79D /* ContentView.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		239270E2292ACC7800D9031E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		239270E429365FBB00D9031E /* addFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addFriendView.swift; sourceTree = "<group>"; };
 		5F09553A2922D7CE00BCB79D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5F09553B2922D7CE00BCB79D /* ModelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		5F09553F2922D7E800BCB79D /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				5F09553F2922D7E800BCB79D /* ContentView.swift */,
 				239270E2292ACC7800D9031E /* HomeView.swift */,
 				5F8FEB8129313A7500F659F6 /* PrivateProfileView.swift */,
+				239270E429365FBB00D9031E /* addFriendView.swift */,
 				6804BE5C2932C2C80029C0E3 /* listView.swift */,
 			);
 			path = Views;
@@ -202,6 +205,7 @@
 				5F0955472922D80B00BCB79D /* BirthdayRow.swift in Sources */,
 				239270E3292ACC7800D9031E /* HomeView.swift in Sources */,
 				5F0955482922D80B00BCB79D /* ProfileView.swift in Sources */,
+				239270E529365FBB00D9031E /* addFriendView.swift in Sources */,
 				5F09553D2922D7CE00BCB79D /* ModelData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
