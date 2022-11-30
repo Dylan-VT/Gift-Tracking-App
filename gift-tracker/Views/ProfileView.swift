@@ -11,7 +11,7 @@ let MonthList = ["Blank", "January", "February", "March", "April", "May", "June"
 
 
 struct ProfileView: View {
-    @Binding var user: UserAccount
+    @State var user: UserAccount
     var body: some View {
         VStack {
             ProfilePicture(image: Image("profile_picture_1"))
@@ -134,7 +134,7 @@ func isLeapYear(_ year: Int) -> Bool{
 struct ProfileView_Previews: PreviewProvider {
     @State static var previewUser: UserAccount = UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25")
     static var previews: some View {
-        ProfileView(user: $previewUser)
+        ProfileView(user: previewUser)
     }
 }
 

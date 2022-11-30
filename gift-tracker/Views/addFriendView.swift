@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct addFriendView: View {
+
+struct AddFriendView: View {
     @State var friendUsername = ""
     @State var added = false
     @State var message = ""
@@ -21,6 +22,7 @@ struct addFriendView: View {
                 TextField("Username", text: $friendUsername)
                     .textFieldStyle(.roundedBorder)
                     .padding(.horizontal, 40)
+                    .padding(.vertical, 15)
                 Button("Add Friend"){
                     (added, message) = addFriend(friendUsername)
                     if added{
@@ -30,6 +32,11 @@ struct addFriendView: View {
                         messageColor = Color.red
                     }
                 }
+                    .padding(.vertical)
+                    .padding(.horizontal, 100)
+                    .foregroundColor(Color.white)
+                    .background(Color.blue)
+                    .clipShape(Capsule())
             }
             .navigationTitle("Add Friend")
         }
@@ -40,11 +47,13 @@ func addFriend(_ userName: String) -> (Bool, String){
     if userName == ""{
         return (false, "Error: No username given")
     }
+    //Call to Database
     return (true, "\(userName) Added as Friend")
 }
 
 struct addFriendView_Previews: PreviewProvider {
     static var previews: some View {
-        addFriendView()
+        AddFriendView()
     }
 }
+

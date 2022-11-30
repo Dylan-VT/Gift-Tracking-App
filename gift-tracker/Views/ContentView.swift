@@ -55,7 +55,7 @@ struct ContentView: View {
                     Image(systemName:"person.2.fill")
                     Text("Birthdays")
                 }
-            ProfileView(user: $user)
+            PrivateProfileView(user: user)
                 .tabItem {
                     Image(systemName: "gearshape.circle")
                     Text("Profile")
