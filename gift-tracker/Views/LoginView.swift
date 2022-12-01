@@ -9,9 +9,7 @@ import SwiftUI
 import Foundation
 
 struct UserAccount: Codable, Identifiable{
-    var id: String{
-        self.display_name
-    }
+    var id: String?
     var birthday: String
     var display_name: String
     var friends: Array<Int>?
@@ -26,6 +24,7 @@ func getLogin(_ username: String, _ password: String,_ completion: @escaping (Us
             let decoder = JSONDecoder()
             do {
                 let json = try decoder.decode(UserAccount.self, from: data)
+                print(json)
                 completion(json)
             } catch {
                 print(error)
