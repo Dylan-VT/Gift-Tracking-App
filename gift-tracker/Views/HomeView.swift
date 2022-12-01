@@ -19,6 +19,7 @@ struct HomeView: View {
         NavigationView {
             List{
                 ForEach(profiles) {profile in
+                    //TODO - change to ProfileView
                     NavigationLink(profile.display_name, destination: PrivateProfileView(user: profile))
                     //}
                     //new loop for the users names
