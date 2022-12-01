@@ -14,7 +14,6 @@ struct PrivateProfileView: View {
     var body: some View {
         NavigationView{
             VStack {
-                
                 ProfilePicture(image: Image("profile_picture_1"))
                 VStack(alignment: .leading) {
                     HStack {
@@ -36,8 +35,6 @@ struct PrivateProfileView: View {
                         Text("Your birthday is in \(daysToB) days.")
                             .font(.title2)
                     }
-                    
-                    
                 }
                 .padding()
                 NavigationLink(destination: AddFriendView()){

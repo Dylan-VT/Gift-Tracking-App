@@ -8,6 +8,36 @@
 import SwiftUI
 
 
+
+func addNewFriend(_ thisUser: String,_ newFriend: String,_ completion: @escaping (URLResponse) -> Void){
+    let url = URL(string: "http://54.237.192.235/addfriend")!
+    let values: [String: Any] = [
+            "username": thisUser,
+            "new_friend": newFriend
+    ]
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue("application/json", forHTTPHeaderField: "accept")
+    
+    guard let httpBody = try? JSONSerialization.data(withJSONObject: values)
+        else {
+        print("Error serializing new friend body")
+        return
+    }
+    request.httpBody = httpBody
+    let session = URLSession.shared
+    session.dataTask(with: request, completionHandler: { data, res, err in
+        if let res = res {
+            print(res)
+            completion(res)
+            
+            
+        }
+        
+    }).resume()
+    
+}
 struct AddFriendView: View {
     @State var friendUsername = ""
     @State var added = false
@@ -44,9 +74,11 @@ struct AddFriendView: View {
 }
 
 func addFriend(_ userName: String) -> (Bool, String){
-    if userName == ""{
-        return (false, "Error: No username given")
+    addNewFriend("Dyln2134", userName, {result in
+        print(result)
     }
+        
+    )
     //Call to Database
     return (true, "\(userName) Added as Friend")
 }
