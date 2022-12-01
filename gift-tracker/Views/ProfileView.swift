@@ -107,7 +107,6 @@ func formatBirthday(_ birthday: String) -> String{
         default:
             retStr.append("th ")
         }
-        
     }
     if let y = year{
         retStr.append(String(y))

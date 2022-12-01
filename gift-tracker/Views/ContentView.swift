@@ -32,6 +32,7 @@ struct ConView: View {
     }
 }
 //This struct is made for the "Calendar View" NavTab
+/*
 struct CalView: View {
     var body: some View {
         NavigationView {
@@ -42,7 +43,7 @@ struct CalView: View {
         }
     }
 }
-
+*/
 
 struct ContentView: View {
     @State var user: UserAccount = UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25")
