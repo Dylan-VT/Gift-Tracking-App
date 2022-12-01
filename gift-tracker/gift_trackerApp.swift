@@ -10,7 +10,10 @@ import SwiftUI
 struct gift_trackerApp: App {
     var body: some Scene {
         WindowGroup {
+            //need to add dateholder as environmental object to work.
+            let dateHolder = DateHolder()
             ContentView()
+                .environmentObject(dateHolder)
         }
     }
 }

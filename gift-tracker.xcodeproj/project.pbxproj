@@ -19,6 +19,12 @@
 		5F8FEB8229313A7500F659F6 /* PrivateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8FEB8129313A7500F659F6 /* PrivateProfileView.swift */; };
 		6804BE5D2932C2C80029C0E3 /* listView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6804BE5C2932C2C80029C0E3 /* listView.swift */; };
 		68BE2CD7292688E400DA86F8 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE2CD6292688E300DA86F8 /* Webservice.swift */; };
+		68F9B9732938230200843D46 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F9B9722938230200843D46 /* CalendarCell.swift */; };
+		68F9B9752938230700843D46 /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F9B9742938230700843D46 /* CalendarHelper.swift */; };
+		68F9B9772938231000843D46 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F9B9762938231000843D46 /* CalendarView.swift */; };
+		68F9B9792938231700843D46 /* DateHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F9B9782938231700843D46 /* DateHolder.swift */; };
+		68F9B97B2938232300843D46 /* DateScrollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F9B97A2938232300843D46 /* DateScrollerView.swift */; };
+		68F9B97D2938232700843D46 /* MonthStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F9B97C2938232700843D46 /* MonthStruct.swift */; };
 		B89E52762901E42000A8A7C3 /* gift_trackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89E52752901E42000A8A7C3 /* gift_trackerApp.swift */; };
 		B89E527A2901E42200A8A7C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B89E52792901E42200A8A7C3 /* Assets.xcassets */; };
 		B89E527D2901E42200A8A7C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B89E527C2901E42200A8A7C3 /* Preview Assets.xcassets */; };
@@ -37,6 +43,12 @@
 		5F8FEB8129313A7500F659F6 /* PrivateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateProfileView.swift; sourceTree = "<group>"; };
 		6804BE5C2932C2C80029C0E3 /* listView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listView.swift; sourceTree = "<group>"; };
 		68BE2CD6292688E300DA86F8 /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
+		68F9B9722938230200843D46 /* CalendarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		68F9B9742938230700843D46 /* CalendarHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
+		68F9B9762938231000843D46 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		68F9B9782938231700843D46 /* DateHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHolder.swift; sourceTree = "<group>"; };
+		68F9B97A2938232300843D46 /* DateScrollerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateScrollerView.swift; sourceTree = "<group>"; };
+		68F9B97C2938232700843D46 /* MonthStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthStruct.swift; sourceTree = "<group>"; };
 		B89E52722901E42000A8A7C3 /* gift-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gift-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B89E52752901E42000A8A7C3 /* gift_trackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gift_trackerApp.swift; sourceTree = "<group>"; };
 		B89E52792901E42200A8A7C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -66,6 +78,7 @@
 		5F09553E2922D7E800BCB79D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				68F9B9712938228100843D46 /* Calendar Views and Files */,
 				5F0955432922D80B00BCB79D /* ProfileView.swift */,
 				5F0955452922D80B00BCB79D /* ProfilePicture.swift */,
 				5F0955422922D80B00BCB79D /* BirthdayRow.swift */,
@@ -98,6 +111,19 @@
 				68BE2CD6292688E300DA86F8 /* Webservice.swift */,
 			);
 			path = WebService;
+			sourceTree = "<group>";
+		};
+		68F9B9712938228100843D46 /* Calendar Views and Files */ = {
+			isa = PBXGroup;
+			children = (
+				68F9B9722938230200843D46 /* CalendarCell.swift */,
+				68F9B9742938230700843D46 /* CalendarHelper.swift */,
+				68F9B9762938231000843D46 /* CalendarView.swift */,
+				68F9B9782938231700843D46 /* DateHolder.swift */,
+				68F9B97A2938232300843D46 /* DateScrollerView.swift */,
+				68F9B97C2938232700843D46 /* MonthStruct.swift */,
+			);
+			path = "Calendar Views and Files";
 			sourceTree = "<group>";
 		};
 		B89E52692901E42000A8A7C3 = {
@@ -194,15 +220,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68F9B97D2938232700843D46 /* MonthStruct.swift in Sources */,
 				5F09553C2922D7CE00BCB79D /* User.swift in Sources */,
+				68F9B9732938230200843D46 /* CalendarCell.swift in Sources */,
+				68F9B9772938231000843D46 /* CalendarView.swift in Sources */,
 				5F0955492922D80B00BCB79D /* LoginView.swift in Sources */,
 				B89E52762901E42000A8A7C3 /* gift_trackerApp.swift in Sources */,
 				5F8FEB8229313A7500F659F6 /* PrivateProfileView.swift in Sources */,
 				6804BE5D2932C2C80029C0E3 /* listView.swift in Sources */,
 				68BE2CD7292688E400DA86F8 /* Webservice.swift in Sources */,
+				68F9B97B2938232300843D46 /* DateScrollerView.swift in Sources */,
 				5F0955402922D7E800BCB79D /* ContentView.swift in Sources */,
 				5F09554A2922D80B00BCB79D /* ProfilePicture.swift in Sources */,
 				5F0955472922D80B00BCB79D /* BirthdayRow.swift in Sources */,
+				68F9B9792938231700843D46 /* DateHolder.swift in Sources */,
+				68F9B9752938230700843D46 /* CalendarHelper.swift in Sources */,
 				239270E3292ACC7800D9031E /* HomeView.swift in Sources */,
 				5F0955482922D80B00BCB79D /* ProfileView.swift in Sources */,
 				239270E529365FBB00D9031E /* addFriendView.swift in Sources */,

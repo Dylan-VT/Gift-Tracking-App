@@ -61,7 +61,7 @@ struct ContentView: View {
                     Text("Profile")
                 }
             
-            CalView()
+            CalendarView()
                 .tabItem {
                     Image(systemName: "calendar")
                     Text("Calendar View")
