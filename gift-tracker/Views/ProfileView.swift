@@ -11,34 +11,42 @@ let MonthList = ["Blank", "January", "February", "March", "April", "May", "June"
 
 
 struct ProfileView: View {
-    @State var user: UserAccount
+    @Binding var user: UserAccount
     var body: some View {
-        VStack {
-            ProfilePicture(image: Image("profile_picture_1"))
-            VStack(alignment: .leading) {
-                HStack {
-                    Text(user.display_name)
-                        .font(.title)
-                    Spacer()
-                    Text(formatBirthday(user.birthday))
-                        .font(.subheadline)
+        ZStack {
+//https://stackoverflow.com/questions/56437036/swiftui-how-do-i-change-the-background-color-of-a-view
+//            Color.purple
+//                .ignoresSafeArea()
+            
+            VStack {
+                ProfilePicture(image: Image("profile_picture_1"))
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(user.display_name)
+                            .font(.title)
+                        Spacer()
+                        Text(formatBirthday(user.birthday))
+                            .font(.subheadline)
+                    }
+                    
+                    Divider()
+                    let daysToB = daysToBirthday(user.birthday)
+                    
+                    if daysToB == 0{
+                        Text("\(user.display_name)'s birthday is Today!")
+                            .font(.title2)
+                    }
+                    else{
+                        Text("\(user.display_name)'s birthday is in \(daysToB) days.")
+                            .font(.system(.title2, design: .rounded))
+                    }
                 }
-                
-                Divider()
-                let daysToB = daysToBirthday(user.birthday)
-                
-                if daysToB == 0{
-                    Text("\(user.display_name)'s birthday is Today!")
-                        .font(.title2)
-                }
-                else{
-                    Text("\(user.display_name)'s birthday is in \(daysToB) days.")
-                        .font(.title2)
-                }
-                
+                .padding()
             }
-            .padding()
+            //.background(Color.teal)
+            Spacer()
         }
+        
     }
 }
 
@@ -134,7 +142,7 @@ func isLeapYear(_ year: Int) -> Bool{
 struct ProfileView_Previews: PreviewProvider {
     @State static var previewUser: UserAccount = UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25")
     static var previews: some View {
-        ProfileView(user: previewUser)
+        ProfileView(user: $previewUser)
     }
 }
 
