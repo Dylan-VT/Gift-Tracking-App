@@ -12,44 +12,73 @@ let MonthList = ["Blank", "January", "February", "March", "April", "May", "June"
 
 struct ProfileView: View {
     @State var user: FriendEvent
+    @State private var isNeedGift: Int = 1
     var body: some View {
         ZStack {
-//https://stackoverflow.com/questions/56437036/swiftui-how-do-i-change-the-background-color-of-a-view
-//            Color.purple
-//                .ignoresSafeArea()
+            Color.myBeige
+                .ignoresSafeArea()
             
             VStack {
                 ProfilePicture(image: Image("profile_picture_1"))
+                    .offset(x: -80, y: -110)
+                    .padding(.bottom, -150)
                 VStack(alignment: .leading) {
-                    HStack {
-                        Text(user.username)
-                            .font(.title)
-                        Spacer()
-                        Text(formatBirthday(user.event_date))
-                            .font(.subheadline)
+                    VStack {
+                        Text(user.display_name)
+                            .font(.largeTitle)
+                            .colorInvert()
+                            .padding(.bottom, 1)
+                        Text("🎂 " + formatBirthday(user.event_date))
+                            .font(.title3)
+                            .colorInvert()
                     }
+                    .padding(.top, 30)
                     
                     Divider()
-                    let daysToB = daysToBirthday(user.event_date)
+                        .colorInvert()
+                    
+                    let daysToB = daysToBirthday(user.birthday)
                     
                     if daysToB == 0{
-                        Text("\(user.username)'s birthday is Today!")
+                        Text("⏱ " + "\(user.username)'s birthday is Today!")
                             .font(.title2)
+                            .colorInvert()
                     }
                     else{
-                        Text("\(user.username)'s birthday is in \(daysToB) days.")
+                        Text("⏱ " + "\(user.username)'s birthday is in \(daysToB) days.")
                             .font(.system(.title2, design: .rounded))
+                            .colorInvert()
                     }
+                    VStack  {
+                        Button("hey") {
+                            UserDefaults.standard.set(2, forKey: "user1")
+                         }
+//                        Button(UserDefaults.standard.integer(forKey: "user1")) {
+//                            UserDefaults.standard.set(2, forKey: "user1")
+//                         }
+                    }
+                    .background(Color.myBlue)
                 }
                 .padding()
             }
-            //.background(Color.teal)
+            .frame(height: 700)
+            .offset(y: -200)
+            .background(Color.myDarkGreen)
+            .offset(y: 80)
             Spacer()
         }
         
     }
 }
 
+extension Color {
+    static let myBlue = Color("CustomColor_Blue")
+    static let myBeige = Color("CustomColor_Beige")
+    static let myLightGreen = Color("CustomColor_LightGreen")
+    static let myDarkGreen = Color("CustomColor_DarkGreen")
+    static let myLightBrown = Color("CustomColor_LightBrown")
+    static let myDarkBrown = Color("CustomColor_DarkBrown")
+}
 
 func formatBirthday(_ birthday: String) -> String{
     let yeMoDa = birthday.components(separatedBy: "-")
