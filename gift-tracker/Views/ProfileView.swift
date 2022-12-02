@@ -9,10 +9,33 @@ import SwiftUI
 
 let MonthList = ["Blank", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
+/*
+UserDetails contains a boolean of whether or not the user needs to get the friend a gift,
+and a list of strings that are gift ideas
+ */
+class FriendDetails: ObservableObject {
+    @Published var needGift: Bool {
+        didSet {
+            UserDefaults.standard.set(needGift, forKey: "need_gift")
+        }
+    }
+    
+    @Published var giftIdea: String {
+        didSet {
+            UserDefaults.standard.set(giftIdea, forKey: "gift_idea")
+        }
+    }
+    
+    init() {
+        self.needGift = UserDefaults.standard.object(forKey: "need_gift") as? Bool ?? false
+        self.giftIdea = UserDefaults.standard.object(forKey: "gift_idea") as? String ?? ""
+    }
+}
 
 struct ProfileView: View {
     @State var user: FriendEvent
-    @State private var isNeedGift: Int = 1
+    @State private var exampleFriendDetails: FriendDetails = FriendDetails()
+    @State var text = "\u{2022} "
     var body: some View {
         ZStack {
             Color.myBeige
@@ -49,20 +72,35 @@ struct ProfileView: View {
                             .font(.system(.title2, design: .rounded))
                             .colorInvert()
                     }
-                    VStack  {
-                        Button("hey") {
-                            UserDefaults.standard.set(2, forKey: "user1")
-                         }
-//                        Button(UserDefaults.standard.integer(forKey: "user1")) {
+                    
+                    //TODO: add boolean for needGift
+                    Toggle("Need Gift? ", isOn: $exampleFriendDetails.needGift)
+                        //.onChange(of: <#T##Equatable#>, perform: <#T##(Equatable) -> Void##(Equatable) -> Void##(_ newValue: Equatable) -> Void#>)
+
+                    //gift ideas
+                    TextEditor(text: $text)
+                        //.frame(height: 400)
+                        //.border(Color.black)
+                        .colorInvert()
+                        .onChange(of: text) { [text] newText in
+                            if newText.suffix(1) == "\n" && newText > text {
+                                self.text.append("\u{2022} ")
+                            }
+                    
+//                    VStack  {
+//                        Button("hey") {
 //                            UserDefaults.standard.set(2, forKey: "user1")
 //                         }
+////                        Button(UserDefaults.standard.integer(forKey: "user1")) {
+////                            UserDefaults.standard.set(2, forKey: "user1")
+////                         }
                     }
                     .background(Color.myBlue)
                 }
                 .padding()
             }
-            .frame(height: 700)
-            .offset(y: -200)
+            .frame(height: 500)
+            //.offset(y: -200)
             .background(Color.myDarkGreen)
             .offset(y: 80)
             Spacer()
@@ -168,12 +206,10 @@ func isLeapYear(_ year: Int) -> Bool{
     return (year % 4 == 0 && (year%100 != 0 || year%400 == 0))
 }
 
-/*
+
 struct ProfileView_Previews: PreviewProvider {
-    @State static var previewUser: UserAccount = UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25")
+    @State static var previewUser: FriendEvent = FriendEvent(event_for: 2, event_name: "event name", event_description: "event decription...", event_date: "event date", username: "user name")
     static var previews: some View {
-        ProfileView(user: $previewUser)
+        ProfileView(user: previewUser)
     }
 }
-
-*/
