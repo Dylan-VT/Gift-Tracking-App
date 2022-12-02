@@ -18,7 +18,7 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             List{
-                ForEach(profiles) {profile in
+                ForEach(profiles.sorted(by: compEvent)) {profile in
                     NavigationLink(profile.username, destination: ProfileView(user: profile))
                     //}
                     //new loop for the users names
@@ -55,3 +55,8 @@ struct HomeView: View {
      }
      */
 }
+
+func compEvent(e1: FriendEvent, e2: FriendEvent) -> Bool{
+    return  daysToBirthday(e1.event_date) < daysToBirthday(e2.event_date)
+}
+

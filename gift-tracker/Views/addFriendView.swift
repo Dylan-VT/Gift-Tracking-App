@@ -9,7 +9,7 @@ import SwiftUI
 
 
 
-func addNewFriend(_ thisUser: String,_ newFriend: String,_ completion: @escaping (URLResponse) -> Void){
+func addNewFriend(_ thisUser: String,_ newFriend: String,_ completion: @escaping (Int) -> Void){
     let url = URL(string: "http://54.237.192.235/addfriend")!
     let values: [String: Any] = [
             "username": thisUser,
@@ -28,9 +28,16 @@ func addNewFriend(_ thisUser: String,_ newFriend: String,_ completion: @escaping
     request.httpBody = httpBody
     let session = URLSession.shared
     session.dataTask(with: request, completionHandler: { data, res, err in
-        if let res = res {
-            print(res)
-            completion(res)
+        if let data = data {
+            let decoder = JSONDecoder()
+            do {
+                let json = try decoder.decode(Int.self, from: data)
+                print(json)
+                completion(json)
+            } catch {
+                completion(0)
+                print(error)
+            }
             
             
         }
@@ -73,13 +80,23 @@ struct AddFriendView: View {
         }
     }
     func addFriend(_ userName: String) -> (Bool, String){
+        var suc = false
+        let group = DispatchGroup()
+        group.enter()
         addNewFriend(user.username, userName, {result in
-            print(result)
+            suc = result == 200
+            group.leave()
         }
             
         )
+        group.wait()
         //Call to Database
-        return (true, "\(userName) Added as Friend")
+        if suc{
+            return (suc, "\(userName) Added as Friend")
+        }
+        else{
+            return (suc, "Error, unable to add \(userName) as friend")
+        }
     }
 }
 
