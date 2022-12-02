@@ -83,6 +83,8 @@ struct AddFriendView: View {
         var suc = false
         let group = DispatchGroup()
         group.enter()
+        //502 == error
+        //200 == successful
         addNewFriend(user.username, userName, {result in
             suc = result == 200
             group.leave()
@@ -92,6 +94,7 @@ struct AddFriendView: View {
         group.wait()
         //Call to Database
         if suc{
+            //refresh
             return (suc, "\(userName) Added as Friend")
         }
         else{

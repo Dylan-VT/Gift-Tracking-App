@@ -15,6 +15,7 @@ struct HomeView: View {
     
     @Binding var profiles: [FriendEvent]
     
+    
     var body: some View {
         NavigationView {
             List{

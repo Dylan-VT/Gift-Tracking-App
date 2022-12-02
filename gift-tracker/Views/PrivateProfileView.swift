@@ -50,8 +50,7 @@ struct PrivateProfileView: View {
     }
 }
 
-//502 == error
-//200 == successful
+
 
 
 
