@@ -29,7 +29,7 @@ struct FriendEvent: Codable, Identifiable{
     
 }
 
-func getLogin(_ username: String, _ password: String,_ completion: @escaping (UserAccount) -> Void){
+func getLogin(_ username: String, _ password: String,_ completion: @escaping (UserAccount?) -> Void){
     let url = URL(string: "http://54.237.192.235/getuser/\(username)")!
     let task = URLSession.shared.dataTask(with: url) {data, response, error in
         if let data = data {
@@ -39,6 +39,7 @@ func getLogin(_ username: String, _ password: String,_ completion: @escaping (Us
                 print(json)
                 completion(json)
             } catch {
+                completion(nil)
                 print(error)
             }
 
@@ -49,7 +50,7 @@ func getLogin(_ username: String, _ password: String,_ completion: @escaping (Us
     
 }
 
-func createUser(_ fullName: String,_ username: String,_ bday: String, _ completion: @escaping (URLResponse) -> Void){
+func createUser(_ fullName: String,_ username: String,_ bday: String, _ completion: @escaping (URLResponse?) -> Void){
     let url = URL(string: "http://54.237.192.235/createuser")!
     let values: [String: Any] = [
             "username": username,
@@ -64,6 +65,7 @@ func createUser(_ fullName: String,_ username: String,_ bday: String, _ completi
     guard let httpBody = try? JSONSerialization.data(withJSONObject: values)
         else {
         print("Error serializing new friend body")
+        completion(nil)
         return
     }
     request.httpBody = httpBody
@@ -73,7 +75,9 @@ func createUser(_ fullName: String,_ username: String,_ bday: String, _ completi
             print(res)
             completion(res)
             
-            
+        }
+        else{
+            completion(nil)
         }
         
     }).resume()
@@ -82,12 +86,13 @@ func createUser(_ fullName: String,_ username: String,_ bday: String, _ completi
 
 func getEvent(_ friendList: String,_ completion: @escaping ([FriendEvent]) -> Void){
     let url = URL(string: "http://54.237.192.235/getevents/\(friendList)")!
+    print(url)
     let task = URLSession.shared.dataTask(with: url) {data, response, error in
         if let data = data {
             let decoder = JSONDecoder()
             do {
                 let json = try decoder.decode([FriendEvent].self, from: data)
-                print(json)
+                print("Here? \(json)")
                 completion(json)
             } catch {
                 print(error)
@@ -107,6 +112,7 @@ struct LoginView: View {
     @State var loggedIn :(success: Bool, erMessage: String) = (false, "")
     @State var username: String = ""
     @State var password: String = ""
+    @State var erMesColor = Color.blue
     @Binding var user: UserAccount
     @Binding var friendsList: String
     @Binding var friendEvents: [FriendEvent]
@@ -118,7 +124,7 @@ struct LoginView: View {
                 //.offset()
                     .font(.system(size:32))
                 Text(loggedIn.erMessage)
-                    .foregroundColor(.red)
+                    .foregroundColor(erMesColor)
                 TextField("Username", text: $username)
                     .textFieldStyle(.roundedBorder)
                     .padding(.horizontal, 40)
@@ -129,9 +135,11 @@ struct LoginView: View {
                 Button("Sign In"){
                     loggedIn = signIn(username, password)
                     if loggedIn.success {
-                        print("Friends: \(friendsList)")
+                        erMesColor = Color.blue
                         getFriendData(friendsList)
-                        
+                    }
+                    else{
+                        erMesColor = Color.red
                     }
                 }
                     .padding(.vertical)
@@ -153,18 +161,34 @@ struct LoginView: View {
         }
     }
     func signIn(_ u: String, _ p: String)-> (success: Bool, erMessage: String){
+        var suc: Bool = false
+        let group = DispatchGroup()
+        group.enter()
         getLogin(u, p, {data in
-            user.username = data.username
-            user.display_name = data.display_name
-            user.birthday = data.birthday
-            if let friends = data.friends {
-                friendsList = friends.map {String($0)}.joined(separator: ",")
-                print("Friends: \(friendsList)")
+            if let dat = data{
+                suc = true
+                user.username = dat.username
+                user.display_name = dat.display_name
+                user.birthday = dat.birthday
+                if let friends = dat.friends {
+                    friendsList = friends.map {String($0)}.joined(separator: ",")
+                    print("Friends: \(friendsList)")
+        
+                }
             }
+            else{
+                suc = false
+            }
+            group.leave()
             
         })
-        
-        return (true, "\(u) \(p)")
+        group.wait()
+        if suc{
+            return (suc, "\(u) Successfully logged on")
+        }
+        else{
+            return (suc, "The credentials you entered are incorrect")
+        }
     }
     
     func getFriendData(_ friendList: String){
@@ -190,12 +214,13 @@ struct CreateAccountView: View{
     @State var bday: String = ""
     @State var confirmPassword: String = ""
     @State var create: (success: Bool, erMessage: String) = (false, "")
+    @State var erMesColor = Color.blue
     var body: some View{
         VStack(alignment: .center){
             Text("Create an Account")
                 .font(.system(size: 32))
             Text(create.erMessage)
-                .foregroundColor(.red)
+                .foregroundColor(erMesColor)
             TextField("Full Name", text: $full_name)
                 .textFieldStyle(.roundedBorder)
                 .padding(.horizontal, 40)
@@ -224,6 +249,10 @@ struct CreateAccountView: View{
                 bday = "\(birthYear)-\(birthMonth)-\(birthDay)"
                 create = CreateAccount(full_name, username, bday, password, confirmPassword)
                 if create.success{
+                    erMesColor = Color.blue
+                }
+                else{
+                    erMesColor = Color.red
                 }
             }
                 .padding(.vertical)
@@ -234,14 +263,30 @@ struct CreateAccountView: View{
         }
     }
     func CreateAccount(_ name: String,_ user: String, _ bday: String, _ pass: String,_ pass2: String) -> (success: Bool, erMessage: String){
+        var suc = false
+        let group = DispatchGroup()
+        group.enter()
         if pass != pass2{
             return (success: false, erMessage: "Passwords don't match")
         }
         else{
             createUser(name, user, bday, {result in
-                print(result)
+                if let _ = result{
+                    suc = true
+                }
+                else{
+                    suc = false
+                }
+                group.leave()
             })
-            return (success: true, erMessage: "Account for \(name) successfully created")
+            group.wait()
+            if suc{
+                return (success: suc, erMessage: "Account for \(name) successfully created")
+            }
+            else{
+                return (suc, "Error creating account")
+                
+            }
         }
     }
     
