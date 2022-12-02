@@ -50,7 +50,7 @@ func getLogin(_ username: String, _ password: String,_ completion: @escaping (Us
     
 }
 
-func createUser(_ fullName: String,_ username: String,_ bday: String, _ completion: @escaping (URLResponse?) -> Void){
+func createUser(_ fullName: String,_ username: String,_ bday: String, _ completion: @escaping (Int) -> Void){
     let url = URL(string: "http://54.237.192.235/createuser")!
     let values: [String: Any] = [
             "username": username,
@@ -65,19 +65,22 @@ func createUser(_ fullName: String,_ username: String,_ bday: String, _ completi
     guard let httpBody = try? JSONSerialization.data(withJSONObject: values)
         else {
         print("Error serializing new friend body")
-        completion(nil)
         return
     }
     request.httpBody = httpBody
     let session = URLSession.shared
     session.dataTask(with: request, completionHandler: { data, res, err in
-        if let res = res {
-            print(res)
-            completion(res)
+        if let data = data {
+            let decoder = JSONDecoder()
+            do {
+                let json = try decoder.decode(Int.self, from: data)
+                print(json)
+                completion(json)
+            } catch {
+                completion(0)
+                print(error)
+            }
             
-        }
-        else{
-            completion(nil)
         }
         
     }).resume()
@@ -271,12 +274,7 @@ struct CreateAccountView: View{
         }
         else{
             createUser(name, user, bday, {result in
-                if let _ = result{
-                    suc = true
-                }
-                else{
-                    suc = false
-                }
+                suc = result == 200
                 group.leave()
             })
             group.wait()

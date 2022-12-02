@@ -17,6 +17,12 @@ struct ContentView: View {
     var body: some View {
         //the tab view section is where the tabs are called in the content view
         TabView {
+            LoginView(user: $user, friendsList: $friendsList, friendEvents: $friendEvents)
+                .tabItem {
+                    Image(systemName:
+                        "key")
+                    Text("Login")
+                }
             HomeView(profiles: $friendEvents)
                 .tabItem {
                     Image(systemName:"person.2.fill")
@@ -33,12 +39,7 @@ struct ContentView: View {
                     Image(systemName: "calendar")
                     Text("Calendar View")
                 }
-            LoginView(user: $user, friendsList: $friendsList, friendEvents: $friendEvents)
-                .tabItem {
-                    Image(systemName:
-                        "key")
-                    Text("Login")
-                }
+            
         }
     }
 
