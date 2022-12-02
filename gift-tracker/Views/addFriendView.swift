@@ -39,6 +39,7 @@ func addNewFriend(_ thisUser: String,_ newFriend: String,_ completion: @escaping
     
 }
 struct AddFriendView: View {
+    @Binding var user: UserAccount
     @State var friendUsername = ""
     @State var added = false
     @State var message = ""
@@ -71,21 +72,23 @@ struct AddFriendView: View {
             .navigationTitle("Add Friend")
         }
     }
-}
-
-func addFriend(_ userName: String) -> (Bool, String){
-    addNewFriend("Dylan2134", userName, {result in
-        print(result)
+    func addFriend(_ userName: String) -> (Bool, String){
+        addNewFriend(user.username, userName, {result in
+            print(result)
+        }
+            
+        )
+        //Call to Database
+        return (true, "\(userName) Added as Friend")
     }
-        
-    )
-    //Call to Database
-    return (true, "\(userName) Added as Friend")
 }
 
+
+
+/*
 struct addFriendView_Previews: PreviewProvider {
     static var previews: some View {
         AddFriendView()
     }
 }
-
+*/

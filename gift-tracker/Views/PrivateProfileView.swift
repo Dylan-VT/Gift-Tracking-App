@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct PrivateProfileView: View {
-    @State var user: UserAccount
+    @Binding var user: UserAccount
     var body: some View {
         NavigationView{
             VStack {
@@ -37,7 +37,7 @@ struct PrivateProfileView: View {
                     }
                 }
                 .padding()
-                NavigationLink(destination: AddFriendView()){
+                NavigationLink(destination: AddFriendView(user: $user)){
                     Text("Add Friends")
                 }
                 .padding(.vertical)
@@ -57,8 +57,9 @@ struct PrivateProfileView: View {
 
  
 struct PrivateProfileView_Previews: PreviewProvider {
+    @State static var user: UserAccount = UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25")
     static var previews: some View {
-        PrivateProfileView(user: UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25"))
+        PrivateProfileView(user: $user)
     }
 }
 

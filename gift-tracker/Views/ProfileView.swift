@@ -11,7 +11,7 @@ let MonthList = ["Blank", "January", "February", "March", "April", "May", "June"
 
 
 struct ProfileView: View {
-    @Binding var user: UserAccount
+    @State var user: FriendEvent
     var body: some View {
         ZStack {
 //https://stackoverflow.com/questions/56437036/swiftui-how-do-i-change-the-background-color-of-a-view
@@ -22,22 +22,22 @@ struct ProfileView: View {
                 ProfilePicture(image: Image("profile_picture_1"))
                 VStack(alignment: .leading) {
                     HStack {
-                        Text(user.display_name)
+                        Text(user.username)
                             .font(.title)
                         Spacer()
-                        Text(formatBirthday(user.birthday))
+                        Text(formatBirthday(user.event_date))
                             .font(.subheadline)
                     }
                     
                     Divider()
-                    let daysToB = daysToBirthday(user.birthday)
+                    let daysToB = daysToBirthday(user.event_date)
                     
                     if daysToB == 0{
-                        Text("\(user.display_name)'s birthday is Today!")
+                        Text("\(user.username)'s birthday is Today!")
                             .font(.title2)
                     }
                     else{
-                        Text("\(user.display_name)'s birthday is in \(daysToB) days.")
+                        Text("\(user.username)'s birthday is in \(daysToB) days.")
                             .font(.system(.title2, design: .rounded))
                     }
                 }
@@ -138,6 +138,8 @@ func daysToBirthday(_ birthday: String) -> Int{
 func isLeapYear(_ year: Int) -> Bool{
     return (year % 4 == 0 && (year%100 != 0 || year%400 == 0))
 }
+
+/*
 struct ProfileView_Previews: PreviewProvider {
     @State static var previewUser: UserAccount = UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25")
     static var previews: some View {
@@ -145,3 +147,4 @@ struct ProfileView_Previews: PreviewProvider {
     }
 }
 
+*/

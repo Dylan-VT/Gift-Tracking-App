@@ -17,6 +17,18 @@ struct UserAccount: Codable, Identifiable{
     var username: String
 }
 
+struct FriendEvent: Codable, Identifiable{
+    var id: String{
+        self.username
+    }
+    var event_for: Int
+    var event_name: String
+    var event_description: String
+    var event_date: String
+    var username: String
+    
+}
+
 func getLogin(_ username: String, _ password: String,_ completion: @escaping (UserAccount) -> Void){
     let url = URL(string: "http://54.237.192.235/getuser/\(username)")!
     let task = URLSession.shared.dataTask(with: url) {data, response, error in
@@ -68,12 +80,36 @@ func createUser(_ fullName: String,_ username: String,_ bday: String, _ completi
     
 }
 
+func getEvent(_ friendList: String,_ completion: @escaping ([FriendEvent]) -> Void){
+    let url = URL(string: "http://54.237.192.235/getevents/\(friendList)")!
+    let task = URLSession.shared.dataTask(with: url) {data, response, error in
+        if let data = data {
+            let decoder = JSONDecoder()
+            do {
+                let json = try decoder.decode([FriendEvent].self, from: data)
+                print(json)
+                completion(json)
+            } catch {
+                print(error)
+            }
+
+        }
+        
+    }
+    task.resume()
+    
+}
+
+
+
+
 struct LoginView: View {
     @State var loggedIn :(success: Bool, erMessage: String) = (false, "")
     @State var username: String = ""
     @State var password: String = ""
     @Binding var user: UserAccount
     @Binding var friendsList: String
+    @Binding var friendEvents: [FriendEvent]
     var body: some View {
         NavigationView{
             VStack(alignment: .center,
@@ -93,6 +129,9 @@ struct LoginView: View {
                 Button("Sign In"){
                     loggedIn = signIn(username, password)
                     if loggedIn.success {
+                        print("Friends: \(friendsList)")
+                        getFriendData(friendsList)
+                        
                     }
                 }
                     .padding(.vertical)
@@ -120,12 +159,23 @@ struct LoginView: View {
             user.birthday = data.birthday
             if let friends = data.friends {
                 friendsList = friends.map {String($0)}.joined(separator: ",")
-                print(friendsList)
-                
+                print("Friends: \(friendsList)")
             }
             
         })
-        return (false, "\(u) \(p)")
+        
+        return (true, "\(u) \(p)")
+    }
+    
+    func getFriendData(_ friendList: String){
+        if friendList == "" {
+            friendEvents = []
+        }
+        else{
+            getEvent(friendList, {data in
+                friendEvents = data
+            })
+        }
     }
     
 }
@@ -194,6 +244,7 @@ struct CreateAccountView: View{
             return (success: true, erMessage: "Account for \(name) successfully created")
         }
     }
+    
 }
 
 
@@ -202,7 +253,8 @@ struct CreateAccountView: View{
 struct LoginView_Previews: PreviewProvider {
     @State static var user: UserAccount = UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25")
     @State static var friendsList = "2"
+    @State static var friendEvents: [FriendEvent] = []
     static var previews: some View {
-        LoginView(loggedIn: (false, ""), user: $user, friendsList: $friendsList)
+        LoginView(loggedIn: (false, ""), user: $user, friendsList: $friendsList, friendEvents: $friendEvents)
     }
 }
