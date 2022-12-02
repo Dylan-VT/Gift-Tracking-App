@@ -24,7 +24,7 @@ struct ProfileView: View {
                     .padding(.bottom, -150)
                 VStack(alignment: .leading) {
                     VStack {
-                        Text(user.display_name)
+                        Text(user.username)
                             .font(.largeTitle)
                             .colorInvert()
                             .padding(.bottom, 1)
@@ -37,7 +37,7 @@ struct ProfileView: View {
                     Divider()
                         .colorInvert()
                     
-                    let daysToB = daysToBirthday(user.birthday)
+                    let daysToB = daysToBirthday(user.event_date)
                     
                     if daysToB == 0{
                         Text("⏱ " + "\(user.username)'s birthday is Today!")
