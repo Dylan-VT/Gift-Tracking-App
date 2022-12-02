@@ -191,8 +191,8 @@ struct CreateAccountView: View{
             createUser(name, user, bday, {result in
                 print(result)
             })
+            return (success: true, erMessage: "Account for \(name) successfully created")
         }
-        return (success: false, erMessage: "Passwords don't match")
     }
 }
 

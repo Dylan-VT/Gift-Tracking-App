@@ -74,7 +74,7 @@ struct AddFriendView: View {
 }
 
 func addFriend(_ userName: String) -> (Bool, String){
-    addNewFriend("Dyln2134", userName, {result in
+    addNewFriend("Dylan2134", userName, {result in
         print(result)
     }
         
