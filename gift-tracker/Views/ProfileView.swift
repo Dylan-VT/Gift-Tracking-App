@@ -24,12 +24,12 @@ struct CheckToggleStyle: ToggleStyle {
 }
 
 struct ProfileView: View {
+    
     @State var user: FriendEvent
-    var userID: String{
-        user.id
-    }
-    @ObservedObject var friendDetails = FriendDetails(id: "id here")
     @State var text = "\u{2022} "
+    
+    @StateObject var giftIdeasViewModel: GiftIdeasViewModel = GiftIdeasViewModel()
+    
     var body: some View {
         ZStack {
             Color.myBeige
@@ -68,9 +68,11 @@ struct ProfileView: View {
                     }
                     
                     //place todo-list view here
-                    Section(header: Text("Gift Ideas")) {
-                        Text("Replace with gift idea list")
+                    NavigationView {
+                        GiftIdeasView()
                     }
+                    .environmentObject(giftIdeasViewModel)
+                    
                 }
                 .padding()
             }
@@ -183,12 +185,12 @@ func isLeapYear(_ year: Int) -> Bool{
 }
 
 
-//struct ProfileView_Previews: PreviewProvider {
-//    @State static var previewUser: FriendEvent = FriendEvent(event_for: 2, event_name: "event name", event_description: "event decription...", event_date: "event date", username: "user name")
-//    static var previews: some View {
-//        ProfileView(user: previewUser)
-//    }
-//}
+struct ProfileView_Previews: PreviewProvider {
+    @State static var previewUser: FriendEvent = FriendEvent(event_for: 2, event_name: "event name", event_description: "event decription...", event_date: "event date", username: "user name")
+    static var previews: some View {
+        ProfileView(user: previewUser)
+    }
+}
 
 
         //OLD USERDEAUTLS
