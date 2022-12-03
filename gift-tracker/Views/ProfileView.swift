@@ -72,14 +72,18 @@ struct ProfileView: View {
                         GiftIdeasView()
                     }
                     .environmentObject(giftIdeasViewModel)
+                    .frame(height: 330)
+                    .cornerRadius(20)
+                    .background(Color.myLightGreen)
                     
                 }
                 .padding()
             }
-            .frame(height: 600)
-            .offset(y: -150)
+            .frame(height: 570)
+            .offset(y: 10)
+            //.offset(y: -150) use this for the private profile
             .background(Color.myDarkGreen)
-            .offset(y: 80)
+            //.offset(y: 20)
             Spacer()
         }
         

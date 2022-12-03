@@ -37,6 +37,7 @@ struct GiftIdeasView: View {
             trailing:
                 NavigationLink("Add", destination: GiftIdeasAddView())
         )
+        .background(Color.myLightBrown)
     }
 }
 
