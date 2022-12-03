@@ -9,7 +9,7 @@ import Foundation
 
 //immutable struct
 //default constructor takes an id
-struct GiftIdeasModel: Identifiable {
+struct GiftIdeasModel: Identifiable, Codable {
     let id: String
     let title: String
     let isCompleted: Bool
