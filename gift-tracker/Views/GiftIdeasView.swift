@@ -12,20 +12,26 @@ struct GiftIdeasView: View {
     @EnvironmentObject var giftIdeasViewModel: GiftIdeasViewModel
     
     var body: some View {
-        List {
-            ForEach(giftIdeasViewModel.items) { idea in
-                GiftIdeasRowView(idea: idea)
-                    .onTapGesture {
-                        withAnimation(.linear) {
-                            giftIdeasViewModel.updateItem(item: idea)
-                        }
+        ZStack {
+            if giftIdeasViewModel.items.isEmpty {
+                Text("No Ideas 😞")
+            } else {
+                List {
+                    ForEach(giftIdeasViewModel.items) { idea in
+                        GiftIdeasRowView(idea: idea)
+                            .onTapGesture {
+                                withAnimation(.linear) {
+                                    giftIdeasViewModel.updateItem(item: idea)
+                                }
+                            }
                     }
+                    .onDelete(perform: giftIdeasViewModel.deleteItem)
+                    .onMove(perform: giftIdeasViewModel.moveItem)
+                }
+                .listStyle(PlainListStyle())
             }
-            .onDelete(perform: giftIdeasViewModel.deleteItem)
-            .onMove(perform: giftIdeasViewModel.moveItem)
         }
         .navigationTitle("Gift Ideas")
-        .listStyle(PlainListStyle())
         .navigationBarItems(
             leading: EditButton(),
             trailing:
