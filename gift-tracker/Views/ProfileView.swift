@@ -6,35 +6,29 @@
 //
 
 import SwiftUI
+import Combine
 
 let MonthList = ["Blank", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
-/*
-UserDetails contains a boolean of whether or not the user needs to get the friend a gift,
-and a list of strings that are gift ideas
- */
-class FriendDetails: ObservableObject {
-    @Published var needGift: Bool {
-        didSet {
-            UserDefaults.standard.set(needGift, forKey: "need_gift")
+struct CheckToggleStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        return HStack {
+            configuration.label
+            Spacer()
+            Image(systemName: configuration.isOn ? "checkmark.square" : "square")
+                .resizable()
+                .frame(width: 22, height: 22)
+                .onTapGesture { configuration.isOn.toggle() }
         }
-    }
-    
-    @Published var giftIdea: String {
-        didSet {
-            UserDefaults.standard.set(giftIdea, forKey: "gift_idea")
-        }
-    }
-    
-    init() {
-        self.needGift = UserDefaults.standard.object(forKey: "need_gift") as? Bool ?? false
-        self.giftIdea = UserDefaults.standard.object(forKey: "gift_idea") as? String ?? ""
     }
 }
 
 struct ProfileView: View {
     @State var user: FriendEvent
-    @State private var exampleFriendDetails: FriendDetails = FriendDetails()
+    var userID: String{
+        user.id
+    }
+    @ObservedObject var friendDetails = FriendDetails(id: "id here")
     @State var text = "\u{2022} "
     var body: some View {
         ZStack {
@@ -73,34 +67,15 @@ struct ProfileView: View {
                             .colorInvert()
                     }
                     
-                    //TODO: add boolean for needGift
-                    Toggle("Need Gift? ", isOn: $exampleFriendDetails.needGift)
-                        //.onChange(of: <#T##Equatable#>, perform: <#T##(Equatable) -> Void##(Equatable) -> Void##(_ newValue: Equatable) -> Void#>)
-
-                    //gift ideas
-                    TextEditor(text: $text)
-                        //.frame(height: 400)
-                        //.border(Color.black)
-                        .colorInvert()
-                        .onChange(of: text) { [text] newText in
-                            if newText.suffix(1) == "\n" && newText > text {
-                                self.text.append("\u{2022} ")
-                            }
-                    
-//                    VStack  {
-//                        Button("hey") {
-//                            UserDefaults.standard.set(2, forKey: "user1")
-//                         }
-////                        Button(UserDefaults.standard.integer(forKey: "user1")) {
-////                            UserDefaults.standard.set(2, forKey: "user1")
-////                         }
+                    //place todo-list view here
+                    Section(header: Text("Gift Ideas")) {
+                        Text("Replace with gift idea list")
                     }
-                    .background(Color.myBlue)
                 }
                 .padding()
             }
-            .frame(height: 500)
-            //.offset(y: -200)
+            .frame(height: 600)
+            .offset(y: -150)
             .background(Color.myDarkGreen)
             .offset(y: 80)
             Spacer()
@@ -108,6 +83,7 @@ struct ProfileView: View {
         
     }
 }
+
 
 extension Color {
     static let myBlue = Color("CustomColor_Blue")
@@ -207,9 +183,26 @@ func isLeapYear(_ year: Int) -> Bool{
 }
 
 
-struct ProfileView_Previews: PreviewProvider {
-    @State static var previewUser: FriendEvent = FriendEvent(event_for: 2, event_name: "event name", event_description: "event decription...", event_date: "event date", username: "user name")
-    static var previews: some View {
-        ProfileView(user: previewUser)
-    }
-}
+//struct ProfileView_Previews: PreviewProvider {
+//    @State static var previewUser: FriendEvent = FriendEvent(event_for: 2, event_name: "event name", event_description: "event decription...", event_date: "event date", username: "user name")
+//    static var previews: some View {
+//        ProfileView(user: previewUser)
+//    }
+//}
+
+
+        //OLD USERDEAUTLS
+//                    Toggle("Need Gift? ", isOn: $friendDetails.needGift)
+//                        //.toggleStyle(CheckToggleStyle())
+//                        .colorInvert()
+//                        //.onChange(of: <#T##Equatable#>, perform: <#T##(Equatable) -> Void##(Equatable) -> Void##(_ newValue: Equatable) -> Void#>)
+
+                    //gift ideas
+//                    TextEditor(text: friendDetails.giftIdea)
+//                        //.frame(height: 400)
+//                        //.border(Color.black)
+//                        //.colorInvert()
+//                        .onChange(of: text) { [text] newText in
+//                            if newText.suffix(1) == "\n" && newText > text {
+//                                self.text.append("\u{2022} ")
+//                            }
