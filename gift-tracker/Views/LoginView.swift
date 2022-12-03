@@ -120,46 +120,65 @@ struct LoginView: View {
     @Binding var friendsList: String
     @Binding var friendEvents: [FriendEvent]
     var body: some View {
+
         NavigationView{
-            VStack(alignment: .center,
-                   spacing: 20){
-                Text("Log In")
-                //.offset()
-                    .font(.system(size:32))
-                Text(loggedIn.erMessage)
-                    .foregroundColor(erMesColor)
-                TextField("Username", text: $username)
-                    .textFieldStyle(.roundedBorder)
-                    .padding(.horizontal, 40)
+            //creates the outlines for the circle
+            ZStack {
+                //adds the extra circles for loginView
+                Color.green
+                    .ignoresSafeArea()
+                Circle()
+                    .scale(1.7)
+                    .foregroundColor(.white.opacity(0.15))
+                Circle()
+                    .scale(1.35)
+                    .foregroundColor(.white)
                 
-                SecureField("Password", text: $password)
-                    .textFieldStyle(.roundedBorder)
-                    .padding(.horizontal, 40)
-                Button("Sign In"){
-                    loggedIn = signIn(username, password)
-                    if loggedIn.success {
-                        erMesColor = Color.blue
-                        getFriendData(friendsList)
+                VStack(alignment: .center,
+                       spacing: 20){
+                    Text("Log In")
+                    //.offset()
+                        .font(.system(size:32))
+                        .cornerRadius(50.0)
+                    Text(loggedIn.erMessage)
+                        .foregroundColor(erMesColor)
+                    TextField("Username", text: $username)
+                        .textFieldStyle(.roundedBorder)
+                        .padding(.horizontal, 40)
+                        .cornerRadius(50.0)
+                    
+                    SecureField("Password", text: $password)
+                        .textFieldStyle(.roundedBorder)
+                        .padding(.horizontal, 40)
+                        .cornerRadius(50.0)
+                    Button("Sign In"){
+                        loggedIn = signIn(username, password)
+                        if loggedIn.success {
+                            erMesColor = Color.blue
+                            getFriendData(friendsList)
+                        }
+                        else{
+                            erMesColor = Color.red
+                        }
                     }
-                    else{
-                        erMesColor = Color.red
-                    }
-                }
+                    .cornerRadius(10.0)
                     .padding(.vertical)
                     .padding(.horizontal, 120)
                     .foregroundColor(Color.white)
                     .background(Color.blue)
                     .clipShape(Capsule())
-                Text("Or")
-                //.offset(y: 30)
-                NavigationLink(destination: CreateAccountView()){
-                    Text("Create an Account")
-                }
+                    Text("Or")
+                    //.offset(y: 30)
+                    NavigationLink(destination: CreateAccountView()){
+                        Text("Create an Account")
+                    }
                     .padding(.vertical)
                     .padding(.horizontal, 80)
                     .foregroundColor(Color.white)
                     .background(Color.blue)
                     .clipShape(Capsule())
+                    .cornerRadius(10.0)
+                }
             }
         }
     }
