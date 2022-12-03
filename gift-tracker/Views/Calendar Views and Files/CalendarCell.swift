@@ -15,10 +15,12 @@ struct CalendarCell: View {
     let startingSpaces: Int
     let daysInMonth: Int
     let daysInPastMonth: Int
+    //var cellColor = Color.white
     var body: some View {
         Text(monthStruct().day())
             .foregroundColor(textColor(type: monthStruct().monthType))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            //.background(cellColor)
     }
     //create a function to return the text color
     func textColor(type: MonthType) -> Color
