@@ -72,9 +72,9 @@ struct ProfileView: View {
                         GiftIdeasView()
                     }
                     .environmentObject(giftIdeasViewModel)
-                    .frame(height: 330)
+                    .frame(width: UIScreen.screenWidth, height: 330)
                     .cornerRadius(20)
-                    .background(Color.myLightGreen)
+                    //.background(Color.myLightGreen)
                     
                 }
                 .padding()
@@ -83,13 +83,12 @@ struct ProfileView: View {
             .offset(y: 10)
             //.offset(y: -150) use this for the private profile
             .background(Color.myDarkGreen)
-            //.offset(y: 20)
+            .offset(y: 20)
             Spacer()
         }
         
     }
 }
-
 
 extension Color {
     static let myBlue = Color("CustomColor_Blue")
@@ -98,6 +97,12 @@ extension Color {
     static let myDarkGreen = Color("CustomColor_DarkGreen")
     static let myLightBrown = Color("CustomColor_LightBrown")
     static let myDarkBrown = Color("CustomColor_DarkBrown")
+}
+
+extension UIScreen{
+   static let screenWidth = UIScreen.main.bounds.size.width
+   static let screenHeight = UIScreen.main.bounds.size.height
+   static let screenSize = UIScreen.main.bounds.size
 }
 
 func formatBirthday(_ birthday: String) -> String{

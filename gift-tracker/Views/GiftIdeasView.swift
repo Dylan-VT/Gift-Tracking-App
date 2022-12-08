@@ -29,15 +29,16 @@ struct GiftIdeasView: View {
                     .onMove(perform: giftIdeasViewModel.moveItem)
                 }
                 .listStyle(PlainListStyle())
+                .offset(y: -50)
             }
         }
-        .navigationTitle("Gift Ideas")
+        //.navigationTitle("Gift Ideas")
         .navigationBarItems(
             leading: EditButton(),
             trailing:
                 NavigationLink("Add", destination: GiftIdeasAddView())
         )
-        .background(Color.myLightBrown)
+        .background(Color.white)
     }
 }
 

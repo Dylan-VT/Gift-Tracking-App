@@ -20,6 +20,7 @@ struct GiftIdeasRowView: View {
         }
         .font(.title2)
         .padding(.vertical, 8)
+        .background(Color.myBeige)
     }
 }
 
