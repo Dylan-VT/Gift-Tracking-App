@@ -47,6 +47,8 @@ func addNewFriend(_ thisUser: String,_ newFriend: String,_ completion: @escaping
 }
 struct AddFriendView: View {
     @Binding var user: UserAccount
+    @Binding var friendsList: String
+    @Binding var friendEvents: [FriendEvent]
     @State var friendUsername = ""
     @State var added = false
     @State var message = ""
@@ -95,6 +97,30 @@ struct AddFriendView: View {
         //Call to Database
         if suc{
             //refresh
+            group.enter()
+            getLogin(userName, "Dummy", {data in
+                if let dat = data{
+                    suc = true
+                    user.username = dat.username
+                    user.display_name = dat.display_name
+                    user.birthday = dat.birthday
+                    if let friends = dat.friends {
+                        friendsList = friends.map {String($0)}.joined(separator: ",")
+                        print("Friends: \(friendsList)")
+            
+                    }
+                }
+                else{
+                    suc = false
+                }
+                group.leave()
+                
+            })
+            group.wait()
+            //dont need to check if successful, we know it will be
+            getEvent(friendsList, {data in
+                friendEvents = data
+            })
             return (suc, "\(userName) Added as Friend")
         }
         else{

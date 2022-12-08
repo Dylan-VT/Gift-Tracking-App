@@ -27,8 +27,9 @@ struct ProfileView: View {
     
     @State var user: FriendEvent
     @State var text = "\u{2022} "
-    
+    /*
     @StateObject var giftIdeasViewModel: GiftIdeasViewModel = GiftIdeasViewModel()
+     */
     
     var body: some View {
         ZStack {
@@ -68,14 +69,16 @@ struct ProfileView: View {
                     }
                     
                     //place todo-list view here
+                    /*
                     NavigationView {
-                        GiftIdeasView()
+                        //GiftIdeasView()
                     }
+                     
                     .environmentObject(giftIdeasViewModel)
                     .frame(width: UIScreen.screenWidth, height: 330)
                     .cornerRadius(20)
-                    //.background(Color.myLightGreen)
-                    
+                    .background(Color.myLightGreen)
+                    */
                 }
                 .padding()
             }
