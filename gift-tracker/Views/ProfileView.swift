@@ -23,10 +23,20 @@ struct CheckToggleStyle: ToggleStyle {
     }
 }
 
+func updateIdeas(_ text: String) -> Void {
+    print("handled commoit. value follows: ")
+    print(text)
+}
+func getIdeas() -> Void {
+    print("getting ideas ...")
+}
+
 struct ProfileView: View {
     
     @State var user: FriendEvent
     @State var text = "\u{2022} "
+    @State var ideaInput = ""
+    
     /*
     @StateObject var giftIdeasViewModel: GiftIdeasViewModel = GiftIdeasViewModel()
      */
@@ -50,6 +60,7 @@ struct ProfileView: View {
                             .font(.title3)
                             .colorInvert()
                     }
+                    .onAppear{ getIdeas() } //get all ideas on first element load
                     .padding(.top, 30)
                     
                     Divider()
@@ -68,7 +79,43 @@ struct ProfileView: View {
                             .colorInvert()
                     }
                     
-                    //place todo-list view here
+                    //gift idea list
+                    //query to get all gift names 54.237.192.235/idea/{user}/{event_for}/{gift_name} (add http:slash slash)
+                    //display as list of text fields
+                    //if user changes, call function that will handle change - use onEditingChange and onCommit event handlers
+                    //getIdeas()
+                    List {
+                        HStack{
+                            Text("Gift Idea: ")
+                            TextField(
+                                "Enter Gift Idea",
+                                text: $ideaInput,
+                                onCommit: {
+                                    updateIdeas(ideaInput)
+                                }
+                            )
+                            .padding()
+                            .colorInvert()
+                        }
+                        .background(Color.myLightGreen)
+                        HStack{
+                            Text("Gift Idea: ")
+                            TextField(
+                                "Enter Gift Idea",
+                                text: $ideaInput,
+                                onCommit: {
+                                    updateIdeas(ideaInput)
+                                }
+                            )
+                            .padding()
+                            .colorInvert()
+                        }
+                        .background(Color.myLightGreen)
+                    }
+                
+                    
+                    
+                    //OLD VERSION WITH USERDEFAULTS - DELETE THIS
                     /*
                     NavigationView {
                         //GiftIdeasView()
