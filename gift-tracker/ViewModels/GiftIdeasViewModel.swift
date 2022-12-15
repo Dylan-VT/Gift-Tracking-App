@@ -16,15 +16,20 @@ class GiftIdeasViewModel: ObservableObject {
         }
     }
     
+    //@Published var userID: String
+    
     //TODO: Add for every user
     let itemsKey: String = "items_list"
     
-    init() {
+    //pass unique key to init?
+    init() {//userID: String) {
+        //let newString = userID
+        //self.userID = newString //new key - replace itemsKey
         getItems()
     }
     
     func getItems() {
-        //dummy data - can delete
+        //default data - can delete
 //        let newItems = [
 //            GiftIdeasModel(title: "First idea!", isCompleted: false),
 //            GiftIdeasModel(title: "Second idea!", isCompleted: true),
