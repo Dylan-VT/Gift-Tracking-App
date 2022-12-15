@@ -17,24 +17,21 @@ struct HomeView: View {
     
     
     var body: some View {
-        NavigationView {
-            List{
-                ForEach(profiles.sorted(by: compEvent)) {profile in
-                    NavigationLink(profile.username, destination: ProfileView(user: profile))
-                    //}
-                    //new loop for the users names
-                    /*
-                     ForEach(viewModel.users, id: \.self) { user in
-                     //create a stack for the users
-                     HStack {
-                     Text(user.name)
-                     .bold()
-                     Text(user.bday)
-                     .bold()
-                     }
-                     .padding(3)
-                     } */
-                }
+            NavigationView {
+                ZStack{
+                    Color.myBeige
+                        .ignoresSafeArea()
+                    List{
+                        ForEach(profiles.sorted(by: compEvent)) {profile in
+                            NavigationLink(destination: ProfileView(user: profile)){
+                                HStack{
+                                    Text(profile.username)
+                                    Spacer()
+                                    Text(profile.event_date)
+                                }
+                            }
+                        }
+                    }
                 .navigationTitle("Upcoming Birthdays")
                 //---------------------------
                 //.onAppear {
