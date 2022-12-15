@@ -14,33 +14,57 @@ struct HomeView: View {
     //@StateObject var viewModel = ViewModel()
     
     @Binding var profiles: [FriendEvent]
+    @State var sortBy = compDate
+    @State var dateButCol = Color.myLightGreen
+    @State var nameButCol = Color.gray
     
     
     var body: some View {
-            NavigationView {
-                ZStack{
-                    Color.myBeige
-                        .ignoresSafeArea()
-                    List{
-                        ForEach(profiles.sorted(by: compEvent)) {profile in
-                            NavigationLink(destination: ProfileView(user: profile)){
-                                HStack{
-                                    Text(profile.username)
-                                    Spacer()
-                                    Text(profile.event_date)
+        NavigationView{
+            VStack{
+                Text("Upcoming Birthdays")
+                    .font(.title)
+                    .foregroundColor(Color.white)
+                HStack{
+                    Text("Sort By:")
+                        .foregroundColor(Color.white)
+                    Spacer()
+                    Button("Date"){
+                        sortBy = compDate
+                        dateButCol = Color.myLightGreen
+                        nameButCol = Color.gray
+                    }
+                    .background(dateButCol)
+                    .foregroundColor(Color.white)
+                    Button("Name"){
+                        sortBy = compName
+                        dateButCol = Color.gray
+                        nameButCol = Color.myLightGreen
+                    }
+                    .background(nameButCol)
+                    .foregroundColor(Color.white)
+                }
+                .padding()
+                VStack{
+                    
+                        List{
+                            ForEach(profiles.sorted(by: sortBy)) {profile in
+                                NavigationLink(destination: ProfileView(user: profile)){
+                                    HStack{
+                                        Text(profile.username)
+                                        Spacer()
+                                        Text("\(daysToBirthday(profile.event_date)) days")
+                                    }
                                 }
                             }
                         }
                     }
-                .navigationTitle("Upcoming Birthdays")
-                //---------------------------
-                //.onAppear {
-                //  viewModel.fetchUser()
-                //}
+                }
+                .background(Color.myBeige)
             }
+            .background(Color.myDarkGreen)
         }
         //---------------------------
-    }
     
     
     /*
@@ -54,7 +78,10 @@ struct HomeView: View {
      */
 }
 
-func compEvent(e1: FriendEvent, e2: FriendEvent) -> Bool{
+func compDate(e1: FriendEvent, e2: FriendEvent) -> Bool{
     return  daysToBirthday(e1.event_date) < daysToBirthday(e2.event_date)
 }
 
+func compName(e1: FriendEvent, e2: FriendEvent) -> Bool{
+    return e1.username.lowercased() < e2.username.lowercased()
+}
