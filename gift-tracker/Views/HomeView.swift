@@ -17,6 +17,7 @@ struct HomeView: View {
     @State var sortBy = compDate
     @State var dateButCol = Color.myLightGreen
     @State var nameButCol = Color.gray
+    @Binding var user: UserAccount
     
     
     var body: some View {
@@ -49,7 +50,7 @@ struct HomeView: View {
                     
                         List{
                             ForEach(profiles.sorted(by: sortBy)) {profile in
-                                NavigationLink(destination: ProfileView(user: profile)){
+                                NavigationLink(destination: ProfileView(user: profile, loggedInUser: $user)){
                                     HStack{
                                         Text(profile.username)
                                         Spacer()
