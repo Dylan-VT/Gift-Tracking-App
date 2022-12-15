@@ -11,6 +11,9 @@ import SwiftUI
 
 
 struct ContentView: View {
+    init() {
+            UITabBar.appearance().backgroundColor = UIColor.green.withAlphaComponent(0.3)
+        }
     @State var user: UserAccount = UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25")
     @State var friendsList: String = "2"
     @State var friendEvents: [FriendEvent] = []

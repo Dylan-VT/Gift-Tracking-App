@@ -125,7 +125,7 @@ struct LoginView: View {
             //creates the outlines for the circle
             ZStack {
                 //adds the extra circles for loginView
-                Color.green
+                Color.gray
                     .ignoresSafeArea()
                 Circle()
                     .scale(1.7)
