@@ -30,7 +30,7 @@ struct FriendEvent: Codable, Identifiable{
 }
 
 func getLogin(_ username: String, _ password: String,_ completion: @escaping (UserAccount?) -> Void){
-    let url = URL(string: "http://54.237.192.235/getuser/\(username)")!
+    let url = URL(string: "http://54.237.192.235/getuser/\(username)/\(password)")!
     let task = URLSession.shared.dataTask(with: url) {data, response, error in
         if let data = data {
             let decoder = JSONDecoder()
@@ -50,12 +50,13 @@ func getLogin(_ username: String, _ password: String,_ completion: @escaping (Us
     
 }
 
-func createUser(_ fullName: String,_ username: String,_ bday: String, _ completion: @escaping (UserAccount?) -> Void){
+func createUser(_ fullName: String,_ username: String,_ bday: String,_ pword: String, _ completion: @escaping (UserAccount?) -> Void){
     let url = URL(string: "http://54.237.192.235/createuser")!
     let values: [String: Any] = [
             "username": username,
             "display_name": fullName,
-            "birthday": bday
+            "birthday": bday,
+            "password": pword
     ]
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
@@ -296,7 +297,7 @@ struct CreateAccountView: View{
             return (success: false, erMessage: "Passwords don't match")
         }
         else{
-            createUser(name, username, bday, {result in
+            createUser(name, username, bday, pass, {result in
                 if let dat = result{
                     user.username = dat.username
                     user.display_name = dat.display_name
