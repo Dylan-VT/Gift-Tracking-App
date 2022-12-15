@@ -14,13 +14,14 @@ struct HomeView: View {
     //@StateObject var viewModel = ViewModel()
     
     @Binding var profiles: [FriendEvent]
+    @Binding var user: UserAccount
     
     
     var body: some View {
         NavigationView {
             List{
                 ForEach(profiles.sorted(by: compEvent)) {profile in
-                    NavigationLink(profile.username, destination: ProfileView(user: profile))
+                    NavigationLink(profile.username, destination: ProfileView(user: profile, loggedInUser: $user))
                     //}
                     //new loop for the users names
                     /*

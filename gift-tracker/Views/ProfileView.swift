@@ -23,12 +23,32 @@ struct CheckToggleStyle: ToggleStyle {
     }
 }
 
+struct Ideas: Codable, Identifiable{
+    var id: String?
+    var idea: String?
+}
+
 func updateIdeas(_ text: String) -> Void {
     print("handled commoit. value follows: ")
     print(text)
 }
-func getIdeas() -> Void {
-    print("getting ideas ...")
+
+func getIdeas(_ username: String, _ eventFor: String,_ completion: @escaping (Ideas?) -> Void){
+    let url = URL(string: "http://54.237.192.235/idea/\(username)/\(eventFor)")!
+    let task = URLSession.shared.dataTask(with: url) {data, response, error in
+        if let data = data {
+            let decoder = JSONDecoder()
+            do {
+                let json = try decoder.decode(Ideas.self, from: data)
+                print(json)
+                completion(json)
+            } catch {
+                completion(nil)
+                print(error)
+            }
+        }
+    }
+    task.resume()
 }
 
 struct ProfileView: View {
@@ -36,6 +56,9 @@ struct ProfileView: View {
     @State var user: FriendEvent
     @State var text = "\u{2022} "
     @State var ideaInput = ""
+    @State var ideasForUser: [String] = [""]
+    
+    @Binding var loggedInUser: UserAccount //pass by ref or value - look into
     
     /*
     @StateObject var giftIdeasViewModel: GiftIdeasViewModel = GiftIdeasViewModel()
@@ -60,7 +83,7 @@ struct ProfileView: View {
                             .font(.title3)
                             .colorInvert()
                     }
-                    .onAppear{ getIdeas() } //get all ideas on first element load
+                    .onAppear{ ideasForUser = saveIdeas("12", "14") }//(loggedInUser.username, user.username) } //get all ideas on first element load
                     .padding(.top, 30)
                     
                     Divider()
@@ -85,6 +108,11 @@ struct ProfileView: View {
                     //if user changes, call function that will handle change - use onEditingChange and onCommit event handlers
                     //getIdeas()
                     List {
+//                        if let ideasList = ideasForUser {
+//                            for idea in ideasList {
+//                                print(idea)
+//                            }
+//                        }
                         HStack{
                             Text("Gift Idea: ")
                             TextField(
@@ -113,8 +141,6 @@ struct ProfileView: View {
                         .background(Color.myLightGreen)
                     }
                 
-                    
-                    
                     //OLD VERSION WITH USERDEFAULTS - DELETE THIS
                     /*
                     NavigationView {
@@ -137,6 +163,34 @@ struct ProfileView: View {
             Spacer()
         }
         
+    }
+    func saveIdeas(_ u: String, _ p: String) -> ([String]){//success: Bool, erMessage: String) {
+        var suc: Bool = false
+        let group = DispatchGroup()
+        group.enter()
+        getIdeas(u, p, {data in
+            if let dat = data{
+                suc = true
+                //populate ideasList with values
+                if let ideas = dat.idea {
+                    ideasForUser = ideas.map {String($0)}//.joined(separator: ",")
+                    print("Ideas: \(String(describing: ideasForUser))")
+                }
+            }
+            else{
+                suc = false
+            }
+            group.leave()
+        })
+        group.wait()
+        if suc{
+            //return (suc, "\(u) Successfully logged on")
+            return ideasForUser
+        }
+        else{
+            //return (suc, "The credentials you entered are incorrect")
+            return["didn't work"]
+        }
     }
 }
 
@@ -244,12 +298,13 @@ func isLeapYear(_ year: Int) -> Bool{
 }
 
 
-struct ProfileView_Previews: PreviewProvider {
-    @State static var previewUser: FriendEvent = FriendEvent(event_for: 2, event_name: "event name", event_description: "event decription...", event_date: "event date", username: "user name")
-    static var previews: some View {
-        ProfileView(user: previewUser)
-    }
-}
+//struct ProfileView_Previews: PreviewProvider {
+//    @State static var previewUser: FriendEvent = FriendEvent(event_for: 2, event_name: "event name", event_description: "event decription...", event_date: "event date", username: "user name")
+//    static var previews: some View {
+//        //ProfileView(user: previewUser), user: $loggedInUser
+//        ProfileView(user: <#T##FriendEvent#>, loggedInUser: <#T##Binding<UserAccount>#>, ideasForUser: <#T##Binding<String?>#>)
+//    }
+//}
 
 
         //OLD USERDEAUTLS

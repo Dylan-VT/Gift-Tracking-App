@@ -26,7 +26,7 @@ struct ContentView: View {
                         "key")
                     Text("Login")
                 }
-            HomeView(profiles: $friendEvents)
+            HomeView(profiles: $friendEvents, user: $user)
                 .tabItem {
                     Image(systemName:"person.2.fill")
                     Text("Birthdays")
