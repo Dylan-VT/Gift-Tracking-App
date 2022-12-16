@@ -49,7 +49,6 @@ struct HomeView: View {
                 }
                 .padding()
                 VStack{
-                    
                         List{
                             ForEach(profiles.sorted(by: sortBy)) {profile in
                                 NavigationLink(destination: ProfileView(user: profile, loggedInUser: $user)){
@@ -62,10 +61,11 @@ struct HomeView: View {
                             }
                         }
                     }
-                }
                 .background(Color.myBeige)
-            }
+                }
             .background(Color.myDarkGreen)
+            }
+            
         }
         //---------------------------
     
