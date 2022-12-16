@@ -13,6 +13,7 @@ struct PrivateProfileView: View {
     @Binding var user: UserAccount
     @Binding var friendsList: String
     @Binding var friendEvents: [FriendEvent]
+    @Binding var password: String
     
     var body: some View {
         ZStack {
@@ -53,7 +54,7 @@ struct PrivateProfileView: View {
                     }
                     .offset(y: -110)
                     .padding()
-                    NavigationLink(destination: AddFriendView(user: $user, friendsList: $friendsList, friendEvents: $friendEvents)){
+                    NavigationLink(destination: AddFriendView(user: $user, password: $password, friendsList: $friendsList, friendEvents: $friendEvents)){
                         Text("Add Friends")
                     }
                     .padding(.vertical)

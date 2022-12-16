@@ -120,6 +120,7 @@ struct LoginView: View {
     @Binding var user: UserAccount
     @Binding var friendsList: String
     @Binding var friendEvents: [FriendEvent]
+    @Binding var passw: String
     var body: some View {
 
         NavigationView{
@@ -157,6 +158,7 @@ struct LoginView: View {
                         if loggedIn.success {
                             erMesColor = Color.blue
                             getFriendData(friendsList)
+                            passw = password
                         }
                         else{
                             erMesColor = Color.red
@@ -336,13 +338,14 @@ struct CreateAccountView: View{
 }
 
 
-
+/*
 
 struct LoginView_Previews: PreviewProvider {
     @State static var user: UserAccount = UserAccount(birthday: "2001-11-17", display_name: "John Appleseed", friends: [], user_id: 12345, username: "johnyap25")
     @State static var friendsList = "2"
     @State static var friendEvents: [FriendEvent] = []
     static var previews: some View {
-        LoginView(loggedIn: (false, ""), user: $user, friendsList: $friendsList, friendEvents: $friendEvents)
+        LoginView(loggedIn: (false, ""), user: $user, friendsList: $friendsList, friendEvents: $friendEvents, )
     }
 }
+*/
