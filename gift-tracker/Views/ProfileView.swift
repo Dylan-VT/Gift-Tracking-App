@@ -25,25 +25,46 @@ struct CheckToggleStyle: ToggleStyle {
 
 struct Ideas: Codable, Identifiable{
     var id: String?
-    var idea: String?
+//    var id: String {
+//        self.id
+//    }
+    //var id: UUID
+    var ideas: [String]?
+    //var ideas: String
 }
 
-func updateIdeas(_ text: String) -> Void {
-    print("handled commoit. value follows: ")
+func updateIdeas(_ username: Int, _ eventFor: Int, _ text: String) -> Void {
+    print("handling TextField commit. value follows: ")
     print(text)
+    
+    //let url = URL(string: "http:/54.237.192.235/idea/\(username)/\(eventFor)/\(text)")!
+    guard let url = URL(string: "http://54.237.192.235/idea/\(username)/\(eventFor)/\(text)") else {
+                print("Error: cannot create URL")
+                return
+            }
+    
+    // Create the request
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.setValue("http://54.237.192.235/idea/\(username)/\(eventFor)/\(text)", forHTTPHeaderField: "Content-Type")
+
 }
 
-func getIdeas(_ username: String, _ eventFor: String,_ completion: @escaping (Ideas?) -> Void){
+//get gift ideas data from URL
+//NOTE - changed the escaping from "Ideas?" to "[Ideas]
+func getIdeas(_ username: String, _ eventFor: String,_ completion: @escaping ([Ideas]) -> Void){
     let url = URL(string: "http://54.237.192.235/idea/\(username)/\(eventFor)")!
     let task = URLSession.shared.dataTask(with: url) {data, response, error in
         if let data = data {
             let decoder = JSONDecoder()
             do {
-                let json = try decoder.decode(Ideas.self, from: data)
+                print("HERE")
+                let json = try decoder.decode([Ideas].self, from: data)
                 print(json)
+                print("after")
                 completion(json)
             } catch {
-                completion(nil)
+                //completion(nil)
                 print(error)
             }
         }
@@ -52,14 +73,13 @@ func getIdeas(_ username: String, _ eventFor: String,_ completion: @escaping (Id
 }
 
 struct ProfileView: View {
-    
     @State var user: FriendEvent
     @State var text = "\u{2022} "
     @State var ideaInput = ""
     @State var ideasForUser: [String] = [""]
     
     @Binding var loggedInUser: UserAccount //pass by ref or value - look into
-    
+
     /*
     @StateObject var giftIdeasViewModel: GiftIdeasViewModel = GiftIdeasViewModel()
      */
@@ -83,7 +103,7 @@ struct ProfileView: View {
                             .font(.title3)
                             .colorInvert()
                     }
-                    .onAppear{ ideasForUser = saveIdeas("12", "14") }//(loggedInUser.username, user.username) } //get all ideas on first element load
+                    .onAppear{ ideasForUser = saveIdeas(String(loggedInUser.user_id), String(user.event_for)) } //get all ideas on first element load
                     .padding(.top, 30)
                     
                     Divider()
@@ -103,42 +123,25 @@ struct ProfileView: View {
                     }
                     
                     //gift idea list
-                    //query to get all gift names 54.237.192.235/idea/{user}/{event_for}/{gift_name} (add http:slash slash)
-                    //display as list of text fields
-                    //if user changes, call function that will handle change - use onEditingChange and onCommit event handlers
-                    //getIdeas()
                     List {
-//                        if let ideasList = ideasForUser {
-//                            for idea in ideasList {
-//                                print(idea)
-//                            }
-//                        }
-                        HStack{
-                            Text("Gift Idea: ")
-                            TextField(
-                                "Enter Gift Idea",
-                                text: $ideaInput,
-                                onCommit: {
-                                    updateIdeas(ideaInput)
-                                }
-                            )
-                            .padding()
-                            .colorInvert()
+                        //display all existing lists
+                        ForEach(ideasForUser, id: \.self) { idea in
+                            HStack{
+                                Text(idea)
+                                    .padding()
+                            }
+                            //.background(Color.myLightGreen)
                         }
-                        .background(Color.myLightGreen)
-                        HStack{
-                            Text("Gift Idea: ")
-                            TextField(
-                                "Enter Gift Idea",
-                                text: $ideaInput,
-                                onCommit: {
-                                    updateIdeas(ideaInput)
-                                }
-                            )
-                            .padding()
-                            .colorInvert()
-                        }
-                        .background(Color.myLightGreen)
+                        //allow user to add new gift ideas
+                        TextField(
+                            "Enter Gift Idea",
+                            text: $ideaInput,
+                            onCommit: {
+                                updateIdeas(loggedInUser.user_id, user.event_for, ideaInput)
+                            }
+                        )
+                        .padding()
+                        //.colorInvert()
                     }
                 
                     //OLD VERSION WITH USERDEFAULTS - DELETE THIS
@@ -164,22 +167,27 @@ struct ProfileView: View {
         }
         
     }
+    //function to get ideas from URL and store in @State var ideasForUser list of strings
     func saveIdeas(_ u: String, _ p: String) -> ([String]){//success: Bool, erMessage: String) {
         var suc: Bool = false
         let group = DispatchGroup()
         group.enter()
         getIdeas(u, p, {data in
-            if let dat = data{
-                suc = true
-                //populate ideasList with values
-                if let ideas = dat.idea {
-                    ideasForUser = ideas.map {String($0)}//.joined(separator: ",")
-                    print("Ideas: \(String(describing: ideasForUser))")
-                }
-            }
-            else{
-                suc = false
-            }
+            print(data)
+//            if let dat = data{
+//                suc = true
+//                print("CHECK IT OUT")
+//                print(dat)
+//                //populate ideasList with values
+//                if let ideas = dat {
+//                    ideasForUser = ideas.map {String($0)}//.joined(separator: ",")
+//                    print("Ideas: \(String(describing: ideasForUser))")
+//                }
+//            }
+//            else{
+//                print("UH OH")
+//                suc = false
+//            }
             group.leave()
         })
         group.wait()
@@ -189,7 +197,7 @@ struct ProfileView: View {
         }
         else{
             //return (suc, "The credentials you entered are incorrect")
-            return["didn't work"]
+            return["gift idea"]
         }
     }
 }

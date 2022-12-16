@@ -26,9 +26,11 @@ struct HomeView: View {
                 Text("Upcoming Birthdays")
                     .font(.title)
                     .foregroundColor(Color.white)
+                    .colorInvert()
                 HStack{
                     Text("Sort By:")
                         .foregroundColor(Color.white)
+                        .colorInvert()
                     Spacer()
                     Button("Date"){
                         sortBy = compDate
